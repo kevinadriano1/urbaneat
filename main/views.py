@@ -10,7 +10,10 @@ import csv
 def show_main(request):
     food_entries = FoodEntry.objects.all()  # Querying all food entries
 
-    csv_file_path = "C:/Users/kevin/Documents/kevin/sem3/pbp/midterm/midterm_project/main/food_database.csv"
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    
+    # Construct the full path to the CSV file
+    csv_file_path = os.path.join(base_dir, 'main', 'food_database.csv')
 
     # Read the CSV content
     csv_content = []
