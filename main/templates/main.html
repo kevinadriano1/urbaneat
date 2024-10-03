@@ -11,23 +11,23 @@
  <h5>Class:</h5>
  <p>{{ class }}</p>
 
- {% if not mood_entries %}
+{% if not food_entries %}
 <p>There are no Food data in the website.</p>
 {% else %}
 <table>
   <tr>
     <th>Food Name</th>
-    <th>Taste</th>
+    <th>description</th>
     <th>Food Rating</th>
   </tr>
 
-  {% comment %} This is how to display mood data
+  {% comment %} This is how to display food data
   {% endcomment %} 
   {% for food_entry in food_entries %}
   <tr>
     <td>{{food_entry.food}}</td>
-    <td>{{food_entry.taste}}</td>
-    <td>{{food_entry.food_ratings}}</td>
+    <td>{{food_entry.description}}</td>
+    <td>{{food_entry.rating}}</td>
   </tr>
   {% endfor %}
 </table>
