@@ -1,8 +1,42 @@
-<h1>Mental Health Tracker</h1>
+{% extends 'base.html' %}
+ {% block content %}
+ <h1>Japan</h1>
 
-<h5>NPM: </h5>
-<p>{{ npm }}<p>
-<h5>Name: </h5>
-<p>{{ name }}<p>
-<h5>Class: </h5>
-<p>{{ class }}<p> <!-- Change according to your class -->
+ <h5>NPM: </h5>
+ <p>{{ npm }}<p>
+
+ <h5>Name:</h5>
+ <p>{{ name }}</p>
+
+ <h5>Class:</h5>
+ <p>{{ class }}</p>
+
+ {% if not mood_entries %}
+<p>There are no Food data in the website.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Food Name</th>
+    <th>Taste</th>
+    <th>Food Rating</th>
+  </tr>
+
+  {% comment %} This is how to display mood data
+  {% endcomment %} 
+  {% for food_entry in food_entries %}
+  <tr>
+    <td>{{food_entry.food}}</td>
+    <td>{{food_entry.taste}}</td>
+    <td>{{food_entry.food_ratings}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_food_entry' %}">
+  <button>Add New Food Entry</button>
+</a>
+
+ {% endblock content %}
