@@ -11,6 +11,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -33,10 +37,11 @@ def show_main(request):
 
     context = {
         'npm': '2306170414',
-        'name': 'Geordie',
+        'name': request.user.username,
         'class': 'PBP KKI',
         'food_entries': food_entries,  # Adding the queried data to the context
-        'csv_content': csv_content
+        'csv_content': csv_content,
+        'last_login': request.COOKIES['last_login'],
     }
 
     return render(request, "main.html", context)
@@ -45,6 +50,8 @@ def create_food_entry(request):
     form = FoodEntryForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
+        food_entry = form.save(commit=False)
+        food_entry.user = request.user
         form.save()
         return redirect('main:show_main')
 
@@ -85,15 +92,22 @@ def login_user(request):
       form = AuthenticationForm(data=request.POST)
 
       if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('main:show_main')
+        user = form.get_user()
+        login(request, user)
+        response = HttpResponseRedirect(reverse("main:show_main"))
+        response.set_cookie('last_login', str(datetime.datetime.now()))
+        return response
 
    else:
       form = AuthenticationForm(request)
    context = {'form': form}
    return render(request, 'login.html', context)
 
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
 
 
 
