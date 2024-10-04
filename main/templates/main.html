@@ -1,89 +1,27 @@
 {% extends 'base.html' %}
- {% block content %}
- <h1>Japan</h1>
+{% load static %}
 
- <h5>NPM: </h5>
- <p>{{ npm }}<p>
+{% block meta %}
+<title>New York Food Searcher</title>
+{% endblock meta %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-100 flex flex-col">
+  <div class="p-2 mb-6 relative"></div>
+    <div class="relative grid grid-cols-1 z-30 md:grid-cols-3 gap-8 pb-8">
+      {% include "card_info.html" with title='NPM' value=npm %}
+      {% include "card_info.html" with title='Name' value=name %}
+      {% include "card_info.html" with title='Class' value=class %}
+    </div>
 
- <h5>Name:</h5>
- <p>{{ name }}</p>
-
- <h5>Class:</h5>
- <p>{{ class }}</p>
-
- {% if not food_entries %}
- <p>There are no Food data in the website.</p>
- {% else %}
- <table>
-   <tr>
-     <th>Restaurant Name</th>
-     <th>Street Address</th>
-     <th>Location</th>
-     <th>Food Type</th>
-     <th>Reviews Rating</th>
-     <th>No of Reviews</th>
-     <th>Comments</th>
-     <th>Contact Number</th>
-     <th>Trip Advisor URL</th>
-     <th>Menu Info</th>
-   </tr>
- 
-   {% for food_entry in food_entries %}
-   <tr>
-     <td>{{ food_entry.name }}</td>
-     <td>{{ food_entry.street_address }}</td>
-     <td>{{ food_entry.location }}</td>
-     <td>{{ food_entry.food_type }}</td>
-     <td>{{ food_entry.reviews_rating }}</td>
-     <td>{{ food_entry.number_of_reviews }}</td>
-     <td>{{ food_entry.comments }}</td>
-     <td>{{ food_entry.contact_number }}</td>
-     <td><a href="{{ food_entry.trip_advisor_url }}">{{ food_entry.trip_advisor_url }}</a></td>
-     <td>{{ food_entry.menu_info }}</td>
-   </tr>
-   {% endfor %}
- </table>
- {% endif %}
-
-
-
-<br />
-
-<a href="{% url 'main:create_food_entry' %}">
-  <button>Add New Food Entry</button>
-</a>
-
-<h2>CSV Content</h2>
 
 {% if csv_content %}
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Street Address</th>
-        <th>Location</th>
-        <th>Type</th>
-        <th>Reviews</th>
-        <th>No of Reviews</th>
-        <th>Comments</th>
-        <th>Contact Number</th>
-        <th>Trip Advisor URL</th>
-        <th>Menu</th>
-    </tr>
-    {% for row in csv_content %}
-    <tr>
-        <td>{{ row.Name }}</td>
-        <td>{{ row.Street_Address }}</td>
-        <td>{{ row.Location }}</td>
-        <td>{{ row.Type }}</td>
-        <td>{{ row.Reviews }}</td>
-        <td>{{ row.No_of_Reviews }}</td>
-        <td>{{ row.Comments }}</td>
-        <td>{{ row.Contact_Number }}</td>
-        <td><a href="{{ row.Trip_advisor_Url }}">View</a></td>
-        <td>{{ row.Menu }}</td>
-    </tr>
+  <div class="flex flex-col gap-10">
+  {% for row in csv_content %}
+      {% include 'food_card.html' %}
     {% endfor %}
-</table>
+  </div>
+</div>
 {% else %}
 <p>No CSV data available.</p>
 {% endif %}
