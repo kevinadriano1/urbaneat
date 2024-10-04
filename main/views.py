@@ -26,9 +26,9 @@ def show_main(request):
         csv_content = None
 
     context = {
-        'npm': '2306123456',
-        'name': 'Pak Bepe',
-        'class': 'PBP E',
+        'npm': '2306170414',
+        'name': 'Geordie',
+        'class': 'PBP KKI',
         'food_entries': food_entries,  # Adding the queried data to the context
         'csv_content': csv_content
     }
@@ -61,6 +61,8 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = FoodEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+
 
 
 
