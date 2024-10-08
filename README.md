@@ -8,6 +8,7 @@ UrbanEat is a food guide and review platform that focuses exclusively on restaur
 - Kevin Adriano - 2306172552
 - Geordie Vannese Hardjanto - 2306170414
 - Muhammad Raditya Indrastata Norman - 2306256450
+- Darren Marcello Sidabuntar - 2306256293
 
 ## Application Description
 UrbanEat is a food guide and review platform that focuses exclusively on restaurants and eateries in New York City (NYC), United States. UrbanEat allows users to discover, rate, and review their dining experiences. Users can also view photos of restaurants and check out detailed reviews from fellow diners. UrbanEat is a resource for locals and tourists looking to explore NYC's iconic culinary scene where one can find all types of restaurant to cater to their cravings, from Italian to Mediterranean.
