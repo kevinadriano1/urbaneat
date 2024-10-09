@@ -16,23 +16,23 @@ UrbanEat is a food guide and review platform that focuses exclusively on restaur
 ## List of Modules to be Implemented
 
 - **Authentication - Login/register - Daren:**  
-  Allow for logging in and registration of existing and new users.
+  Allow for logging in and registration of existing and new users with appropriate security, allowing users to view and access the website according to their permissions.
 
 - **Leaderboards - See top restaurants - Dito:**  
-  Allow users to see the highest-rated restaurants.
+  Allow users to see the highest-rated restaurants based on reviews and ratings so that users are well-informed on the best places where they can choose to dine. 
 
 - **User role - Edit User profiles - Guruprasanth Meyyarasu:**  
-  User can see and edit their data.
+  Users can see and edit their data (i.e. profile picture). 
 
 - **Admin role - Add/edit/delete restaurants - Flori:**  
-  Allow admin users to add their own restaurants with initially 0 reviews to the database. The type of data an admin user can add is as follows: Name, Street Address, Location, Type, Reviews (initialized at 0), No of Reviews (initialized at 0), Comments (initialized at None), Contact Number, Restaurant_Url, Menu_url, Image_url. The image url can be manually uploaded by the user, but optionally, adding in a Trip advisor url of that restaurant will also return an image url via our web scraper.
+  Allow admin users to add their own restaurants with initially 0 reviews to the database. The type of data an admin user can add is as follows: Name, Street Address, Location, Type, Reviews (initialized at 0), No of Reviews (initialized at 0), Comments (initialized at None), Contact Number, Restaurant_Url, Menu_url, Image_url.
 
 - **Collection - Filtering/searching restaurants - Geordie:**  
   Filter and search the restaurant based on their type of cuisine.  
   The feature "Collection - Filtering/searching restaurants" allows users to filter and search restaurants based on their type of cuisine. This functionality enables users to easily discover restaurants that match their preferred cuisine, such as Italian, Chinese, Indian, or any other type. Users can specify their desired cuisine in the search bar or use a filter option to narrow down the available restaurants, making the process of finding a suitable dining option more efficient and tailored to their preferences.
 
 - **Review - Users can review their favorite restaurant - Kevin:**  
-  Allow users to add, edit and delete reviews of restaurants.
+  Allow users to add, edit and delete reviews of restaurants. This allows other users to know what to expect from a restaurant before they decide to go there. 
 
 ## Source of Initial Dataset for Main Product Category 
 We got the initial dataset from Kaggle for restaurant recommendations in the USA with the link below:  
