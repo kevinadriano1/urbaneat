@@ -25,7 +25,7 @@
 {% else %}
 <p>No CSV data available.</p>
 {% endif %}
-<a href="{% url 'main:logout' %}">
+<a href="{% url 'auth:logout' %}">
   <button>Logout</button>
   <h5>Last login session: {{ last_login }}</h5>
 </a>
