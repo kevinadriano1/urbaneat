@@ -1,32 +1,53 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="h-screen bg-gray-100 text-gray-900 flex items-center justify-center">
+    <div class="flex w-full h-full bg-white shadow-lg sm:rounded-lg">
+        <!-- Left Side (Login Form) -->
+        <div class="lg:w-1/4 p-8 sm:p-12 flex flex-col justify-center bg-white-100">
+            <div class="flex justify-center mb-8">
+                <img src="{% static 'image/file.png' %}" class="w-48" alt="UrbanEat Logo" /> <!-- Logo dengan ukuran lebih kecil -->
+            </div>
+            <h1 class="text-2xl font-extrabold text-black mb-6 text-center">Log In</h1>
+            <div class="flex flex-col items-center w-full max-w-sm mx-auto">
+                <form method="POST" action="" class="w-full space-y-4">
+                    {% csrf_token %}
+                    <input class="w-full px-4 py-3 rounded-full border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-500" type="username" name="username" placeholder="Username" required />
+                    <input class="w-full px-4 py-3 rounded-full border border-gray-300 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-500" type="password" name="password" placeholder="Password" required />
+                    <button class="w-full bg-black text-white py-2 rounded-full hover:bg-gray-800 transition-all duration-300 ease-in-out focus:outline-none" type="submit">
+                        Continue
+                    </button>
+                </form>
+                <div class="mt-4 text-sm text-gray-600 text-center">
+                    <a href="#" class="underline">Forgot your password?</a><br>
+                    Do not have an account yet? <a href="{% url 'auth:register' %}">Register Now</a>
+                </div>
+            </div>
+        </div>
+        <!-- Right Side (Image with Welcome Text and Logo) -->
+        <div class="lg:w-4/5 w-full h-full relative">
+            <!-- Gambar Latar -->
+            <img src="https://images.unsplash.com/photo-1526361547623-9dd08c979bb1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="absolute inset-0 w-full h-full object-cover" alt="Restaurant Background" />
 
-{% block meta %}
-<title>Login</title>
-{% endblock meta %}
-
-{% block content %}
-<div class="login">
-  <h1>Login</h1>
-
-  <form method="POST" action="">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-      <tr>
-        <td></td>
-        <td><input class="btn login_btn" type="submit" value="Login" /></td>
-      </tr>
-    </table>
-  </form>
-
-  {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} Don't have an account yet?
-  <a href="{% url 'auth:register' %}">Register Now</a>
-</div>
-
-{% endblock content %}
+            <!-- Logo di Bagian Kanan Atas -->
+            <div class="absolute top-8 left-24 flex items-center space-x-2">
+                <img src="{% static 'image/Vector.png' %}" alt="UrbanEat Text" class="w-32" />
+            </div>
+            <div class="absolute top-20 left-52 flex items-center space-x-2">
+                <img src="{% static 'image/UrbanEat.png' %}" alt="UrbanEat Logo" class="w-36" />
+            </div>
+            <!-- Teks Sambutan di Tengah Bawah -->
+            <div class="absolute bottom-32 left-24 text-white">
+                <h2 class="text-8xl font-bold mb-2">Welcome!</h2>
+                <h2 class="text-4xl font mb-1">Let's find you some good eats.</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
