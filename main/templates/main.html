@@ -7,27 +7,31 @@
 {% block content %}
 {% include 'navbar.html' %}
 <div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-100 flex flex-col">
-  <div class="p-2 mb-6 relative"></div>
-    <div class="relative grid grid-cols-1 z-30 md:grid-cols-3 gap-8 pb-8">
-      {% include "card_info.html" with title='NPM' value=npm %}
-      {% include "card_info.html" with title='Name' value=name %}
-      {% include "card_info.html" with title='Class' value=class %}
-    </div>
 
-
-{% if food_entries %}
-  <div class="flex flex-col gap-10">
-  {% for row in food_entries %}
-      {% include 'food_card.html' %}
-    {% endfor %}
+  <!-- Search Bar -->
+  <div class="p-2 mb-6 relative">
+    <form method="GET" action="">
+      <input type="text" name="q" placeholder="Search restaurants..." value="{{ request.GET.q }}" class="p-2 border rounded w-full md:w-1/2">
+      <button type="submit" class="p-2 bg-purple-500 text-white rounded">Search</button>
+    </form>
   </div>
-</div>
-{% else %}
-<p>No CSV data available.</p>
-{% endif %}
-<a href="{% url 'auth:logout' %}">
-  <button>Logout</button>
-  <h5>Last login session: {{ last_login }}</h5>
-</a>
 
+
+  <!-- Restaurant Listings -->
+  {% if food_entries %}
+    <div class="flex flex-col gap-10">
+      {% for row in food_entries %}
+        {% include 'food_card.html' %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No restaurants found.</p>
+  {% endif %}
+  
+  <!-- Logout -->
+  <a href="{% url 'auth:logout' %}">
+    <button>Logout</button>
+    <h5>Last login session: {{ last_login }}</h5>
+  </a>
+</div>
 {% endblock content %}
