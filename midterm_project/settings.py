@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'authentication',
     'leaderboards',
     'user_role',
+    'reviews'
 ]
 
 MIDDLEWARE = [

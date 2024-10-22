@@ -17,6 +17,6 @@ class FoodEntry(models.Model):
     menu_info = models.TextField(default='N/A')  # For menu info
  # For menu info
 
-    @property
-    def is_food_strong(self):
-        return self.reviews_rating > 5
+
+    def __str__(self):
+        return f"{self.name} - {self.street_address}"  # Customize as needed

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Review for {{ restaurant.name }}</title>
+</head>
+<body>
+    <h1>Add Review for {{ restaurant.name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+</body>
+</html>

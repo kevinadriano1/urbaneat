@@ -15,9 +15,9 @@
     </div>
 
 
-{% if csv_content %}
+{% if food_entries %}
   <div class="flex flex-col gap-10">
-  {% for row in csv_content %}
+  {% for row in food_entries %}
       {% include 'food_card.html' %}
     {% endfor %}
   </div>
@@ -29,4 +29,5 @@
   <button>Logout</button>
   <h5>Last login session: {{ last_login }}</h5>
 </a>
+
 {% endblock content %}
