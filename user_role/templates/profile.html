@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100 pt-20">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <h1 class="text-3xl font-bold text-center mb-6">{{ user.username }}'s Profile</h1>
+
+        <div class="profile-pic text-center mb-6">
+            {% if user.profile.profile_picture %}
+                <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}'s profile picture" class="w-32 h-32 rounded-full mx-auto shadow-md">
+            {% else %}
+                <img src="{% static 'image/default-profile.jpg' %}" alt="Default profile picture" class="w-32 h-32 rounded-full mx-auto shadow-md">
+            {% endif %}
+        </div>
+
+        <div class="profile-section space-y-4">
+            <div class="bg-gray-100 rounded-lg p-4">
+                <strong>Name:</strong> {{ user.profile.name }}
+            </div>
+            <div class="bg-gray-100 rounded-lg p-4">
+                <strong>Class:</strong> {{ user.profile.class1 }}
+            </div>
+            <div class="bg-gray-100 rounded-lg p-4">
+                <strong>NPM:</strong> {{ user.profile.npm }}
+            </div>
+            <div class="bg-gray-100 rounded-lg p-4">
+                <strong>Date of Birth:</strong> {{ user.profile.birth_date }}
+            </div>
+            <div class="bg-gray-100 rounded-lg p-4">
+                <strong>E-Mail:</strong> {{ user.profile.email }}
+            </div>
+            <div class="bg-gray-100 rounded-lg p-4">
+                <strong>Phone number:</strong> {{ user.profile.phone_number }}
+            </div>
+        </div>
+
+        <!-- Edit Profile Button -->
+        <div class="text-center mt-6">
+            <a href="{% url 'edit_profile' %}">
+                <button type="button" class="btn btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg">Edit Profile</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

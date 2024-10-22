@@ -1,3 +1,5 @@
+{% load static %}
+
 <header id="main-header" class="bg-gray-800 text-white fixed w-full top-0 z-50 transition-all duration-300">
   <div class="container mx-auto px-4">
       <div class="flex items-center justify-between py-4">
@@ -15,8 +17,8 @@
           </button>
           <nav id="main-nav" class="fixed inset-y-0 right-0 transform translate-x-full md:relative md:translate-x-0 bg-gray-800 md:bg-transparent w-64 md:w-auto h-full md:h-auto overflow-y-auto md:overflow-visible transition-transform duration-300 ease-in-out md:transition-none">
               <ul class="pt-16 md:pt-0 px-4 md:px-0 md:flex space-y-2 md:space-y-0 md:space-x-4">
-                  <li><a href="#" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">Home</a></li>
-                  <li class="relative group">
+                  <li class="flex items-center"><a href="#" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">Home</a></li>
+                  <li class="relative group flex items-center">
                       <a href="#" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200 flex items-center justify-between">
                           Products
                           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -30,8 +32,21 @@
                           <li><a href="#" class="block px-4 py-2 hover:bg-gray-600 md:hover:bg-gray-100 transition duration-200">Sports & Outdoors</a></li>
                       </ul>
                   </li>
-                  <li><a href="#" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">About</a></li>
-                  <li><a href="#" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">Contact</a></li>
+                  <li class="flex items-center"><a href="#" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">About</a></li>
+                  <li class="flex items-center"><a href="#" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">Contact</a></li>
+                  <li class="flex items-center">
+                    <a href="{% url 'profile' %}">
+                        {% if user.is_authenticated %}
+                            {% if user.profile.profile_picture %}
+                                <!-- Show User's Profile Picture -->
+                                <img src="{{ user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full object-cover" alt="Profile Picture">
+                            {% else %}
+                                <!-- Default Placeholder if no profile picture -->
+                                <img src="{% static 'image/default-profile.jpg' %}" class="w-10 h-10 rounded-full object-cover" alt="Default Profile Picture">
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                  </li>
               </ul>
           </nav>
       </div>

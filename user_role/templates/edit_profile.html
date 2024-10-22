@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100 pt-20">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <h1 class="text-3xl font-bold text-center mb-6">Edit {{ user.username }}'s Profile</h1>
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group mb-6 text-center">
+                <label for="id_profile_picture" class="block text-gray-700 font-bold mb-2">Profile Picture:</label>
+                {% if user.profile.profile_picture %}
+                    <img src="{{ user.profile.profile_picture.url }}" alt="{{ user.username }}'s profile picture" class="w-32 h-32 rounded-full mx-auto shadow-md">
+                {% endif %}
+                {{ form.profile_picture }}
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="id_name" class="block text-gray-700 font-bold mb-2">Name:</label>
+                {{ form.name }}
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="class1" class="block text-gray-700 font-bold mb-2">Class:</label>
+                {{ form.class1 }}
+            </div>  
+
+            <div class="form-group mb-4">
+                <label for="npm" class="block text-gray-700 font-bold mb-2">NPM:</label>
+                {{ form.npm }}
+            </div>  
+
+            <div class="form-group mb-4">
+                <label for="id_birth_date" class="block text-gray-700 font-bold mb-2">Date of Birth:</label>
+                {{ form.birth_date }}
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="id_email" class="block text-gray-700 font-bold mb-2">Email:</label>
+                {{ form.email }}
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="id_phone_number" class="block text-gray-700 font-bold mb-2">Phone Number (Optional):</label>
+                {{ form.phone_number }}
+            </div>            
+
+            <div class="text-center">
+                <input type="submit" value="Save Changes" class="btn bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
