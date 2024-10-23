@@ -1,28 +1,276 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews for {{ restaurant.name }}</title>
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: #fff;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            color: #333;
+        }
+
+        .header .sub-info {
+            color: #6c757d;
+            font-size: 1rem;
+        }
+
+        .header .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header .actions a {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .header .actions a:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Information section */
+        .info-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .info-card p {
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Reviews section */
+        .reviews-section {
+            margin-top: 40px;
+        }
+
+        .reviews-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .review-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07);
+        }
+
+        .review-card .rating {
+            font-size: 1.2rem;
+            color: #FFD700;
+            margin-right: 10px;
+        }
+
+        .review-card .content {
+            flex-grow: 1;
+        }
+
+        .review-card .content p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .review-card .actions a {
+            background-color: #E74C3C;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .review-card .actions a:hover {
+            background-color: #C0392B;
+            transform: translateY(-2px);
+        }
+
+        /* CTA button */
+        .cta-btn {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            display: block;
+            margin: 50px auto;
+            width: 220px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header .actions {
+                justify-content: center;
+                margin-top: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Reviews for {{ restaurant.name }}</h1>
-    <ul>
-        <li>
-            Rating: {{ restaurant.reviews_rating }}<br>
-            Comment: {{ restaurant.comments }}
-        </li>
+    <!-- Header -->
+    <div class="header">
+        <div>
+            <h1>{{ restaurant.name }}</h1>
+            <div class="sub-info">21 reviews | $$ - $$$ | French Cuisine</div>
+        </div>
+        <div class="actions">
+            <a href="#">Reserve a table</a>
+            <a href="{% url 'main:show_main' %}">Back to Home</a>
+        </div>
+    </div>
 
-        {% for review in reviews %}
-            <li>
+    <div class="container">
+        <!-- Information Section -->
+        <div class="info-section">
+            <div class="info-card">
+                <h3>Ratings and Reviews</h3>
+                <p>Average Rating: 4.5 / 5.0</p>
+                <p>21 reviews</p>
+            </div>
+            <div class="info-card">
+                <h3>Location & Contact</h3>
+                <p>95 Delancey St, New York City, NY 10002</p>
+                <p>+1 212-228-0909</p>
+            </div>
+        </div>
 
-                Rating: {{ review.rating }}
-                Comment: {{ review.comment }}
-                <a href="{% url 'review:delete_review' pk=review.pk %}">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'review:add_review' restaurant.id %}">Add a Review</a>
-    <a href="{% url 'main:show_main' %}">Back to Restaurant List</a>
+        <!-- Reviews Section -->
+        <div class="reviews-section">
+            <h2>Customer Reviews</h2>
+            <div class="review-card">
+                <div class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <div class="content">
+                    <p>Great service, wonderful food! Highly recommend the escargot and the lamb chops.</p>
+                </div>
+                <div class="actions">
+                    <a href="#">Delete</a>
+                </div>
+            </div>
+
+            <!-- Add more reviews dynamically -->
+            {% for review in reviews %}
+            <div class="review-card">
+                <div class="rating">
+                    {% for i in "12345" %}
+                        {% if review.rating|add:"0" >= i|add:"0" %}
+                            <span class="star">&#9733;</span>
+                        {% else %}
+                            <span class="star unfilled">&#9733;</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="content">
+                    <p>{{ review.comment }}</p>
+                </div>
+                <div class="actions">
+                    <a href="{% url 'review:delete_review' pk=review.pk %}">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Call to action button -->
+        <a href="{% url 'review:add_review' restaurant.id %}" class="cta-btn">Write a Review</a>
+    </div>
 </body>
 </html>
-
-
