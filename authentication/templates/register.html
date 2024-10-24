@@ -19,19 +19,48 @@
             <div class="w-full max-w-md mx-auto">
                 <form method="POST" action="" class="space-y-6">
                     {% csrf_token %}
+                    <!-- Loop through the form fields -->
                     {% for field in form %}
                         <div class="relative">
                             {{ field.errors }}
-                            <label class="block text-gray-700 font-medium mb-2 transition-colors duration-300 hover:text-blue-500" for="{{ field.id_for_label }}">
-                                {{ field.label }}
-                            </label>
-                            {{ field|add_class:"w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 hover:border-blue-400" }}
+                            
+                            <!-- Special handling for the group_choice field (radio buttons) -->
+                            {% if field.name == "group_choice" %}
+                                <!-- Change label to 'Who are you?' -->
+                                <label class="block text-gray-700 font-medium mb-2 transition-colors duration-300 hover:text-blue-500" for="{{ field.id_for_label }}">
+                                    Permissions
+                                </label>
+                                <div class="space-y-2">
+                                    <!-- Iterate over the radio options and style them properly -->
+                                    {% for subwidget in field %}
+                                    <div class="flex items-center">
+                                        <div class="mr-2">
+                                            {{ subwidget.tag }}
+                                        </div>                                        
+                                        <label class="text-gray-700">
+                                            {% if subwidget.choice_label == "Restaurant_Manager" %}
+                                                Restaurant Manager
+                                            {% else %}
+                                                {{ subwidget.choice_label }}
+                                            {% endif %}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <label class="block text-gray-700 font-medium mb-2 transition-colors duration-300 hover:text-blue-500" for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                </label>
+                                {{ field|add_class:"w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 hover:border-blue-400" }}
+                            {% endif %}
                         </div>
                     {% endfor %}
+
                     <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none shadow-lg" type="submit">
                         Register
                     </button>
                 </form>
+
                 {% if messages %}
                     <ul class="mt-4 text-red-600">
                         {% for message in messages %}
@@ -44,18 +73,25 @@
                 </div>
             </div>
         </div>
+
         <!-- Right Side (Image with Welcome Text and Logo) -->
         <div class="md:w-1/2 h-64 md:h-auto relative">
             <!-- Background Image -->
             <img src="https://images.unsplash.com/photo-1526361547623-9dd08c979bb1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105" alt="Restaurant Background" />
             
             <!-- Overlay -->
-            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-start p-8">
-                <img src="{% static 'image/Vector.png' %}" alt="UrbanEat Text" class="w-28 mb-2" />
-                <img src="{% static 'image/UrbanEat.png' %}" alt="UrbanEat Logo" class="w-32 mb-4" />
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-start items-start p-8">
+                <!-- Logo at the top -->
+                <img src="{% static 'image/White_logo.png' %}" alt="UrbanEat Text" class="w-28 mb-2" />
+            
+                <!-- Spacer to push content to the bottom -->
+                <div class="flex-grow"></div>
+            
+                <!-- Text content at the bottom -->
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-2">Welcome!</h2>
                 <p class="text-lg md:text-xl text-gray-200">Let's find you some good eats.</p>
             </div>
+            
         </div>
     </div>
 </body>

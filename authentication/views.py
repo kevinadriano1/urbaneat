@@ -3,7 +3,6 @@ from main.models import FoodEntry
 from django.http import HttpResponse
 from django.core import serializers
 from main.models import FoodEntry  # Import your model
-from main.forms import FoodEntryForm  # Import your form
 import os
 import csv
 from django.contrib.auth.forms import UserCreationForm
@@ -15,18 +14,32 @@ from django.contrib.auth import logout
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from authentication.forms import CustomUserCreationForm
+
+from django.contrib.auth.models import Group
 
 def register(request):
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
 
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+
+            # Add user to the appropriate group
+            group_choice = form.cleaned_data.get('group_choice')
+            if group_choice == 'user':
+                group = Group.objects.get(name='User')
+            elif group_choice == 'manager':
+                group = Group.objects.get(name='Restaurant_Manager')
+
+            user.groups.add(group)
             messages.success(request, 'Your account has been successfully created!')
             return redirect('auth:login')
-    context = {'form':form}
+
+    context = {'form': form}
     return render(request, 'register.html', context)
+
 
 def login_user(request):
    if request.method == 'POST':

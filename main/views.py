@@ -2,13 +2,10 @@ from django.shortcuts import render, redirect
 from main.models import FoodEntry
 from django.http import HttpResponse
 from django.core import serializers
-from main.forms import FoodEntryForm  # Import your form
+#from main.forms import FoodEntryForm  # Import your form
 import os
+from django.contrib.auth.models import Group
 import csv
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 import datetime
@@ -51,12 +48,14 @@ def show_main(request):
                         comments=row.get('Comments', 'N/A'),
                         contact_number=row.get('Contact_Number', 'N/A'),
                         trip_advisor_url=row.get('Trip_advisor_Url', 'N/A'),
-                        menu_info=row.get('Menu', 'N/A')
+                        menu_info=row.get('Menu', 'N/A'), 
+                        image_url=row.get('Image_url', 'N/A'),
                     )
                     food_entry.save()
         except FileNotFoundError:
             csv_content = None
 
+    is_manager = request.user.groups.filter(name='Restaurant_Manager').exists()
     # Prepare context for the template
     context = {
         'npm': '2306170414',
@@ -65,21 +64,10 @@ def show_main(request):
         'food_entries': food_entries,  # Adding the queried (filtered) food entries to the context
         'star_range': range(5),
         'last_login': request.COOKIES.get('last_login', 'Not set'),
+        'is_manager': is_manager, 
     }
 
     return render(request, "main.html", context)
-
-def create_food_entry(request):
-    form = FoodEntryForm(request.POST or None)
-
-    if form.is_valid() and request.method == "POST":
-        food_entry = form.save(commit=False)
-        food_entry.user = request.user
-        form.save()
-        return redirect('main:show_main')
-
-    context = {'form': form}
-    return render(request, "create_food_entry.html", context)
 
 def show_xml(request):
     data = FoodEntry.objects.all()
@@ -96,4 +84,5 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = FoodEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
 

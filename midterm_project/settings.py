@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'user_role',
     'reviews',
     'widget_tweaks',
+    'admin_role',
 ]
 
 MIDDLEWARE = [

@@ -1,53 +1,66 @@
-<section class="w-full antialiased">
-    <div class="flex flex-wrap md:flex-nowrap shadow-lg rounded-lg w-full group cursor-pointer transform duration-500 hover:-translate-y-1 mx-auto rounded-xl overflow-hidden">
-      
-      <!-- Image Section -->
-      <img class="w-full h-auto md:w-[30%] object-cover" src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/3b/b6/04/red-rooster-harlem.jpg?w=600&h=400&s=1" alt="">
-  
-      <!-- Text Content Section -->
-      <div class="flex flex-col justify-between w-full md:w-[70%]">
-        <div class="p-5 pb-10">
-          <h1 class="text-2xl font-semibold text-gray-800 mt-4">
-            {{row.name}}
-          </h1>
-          <p class="text-xl text-gray-400 mt-2 leading-relaxed">
-            {{ row.comments }}
-          </p>
+<section class="w-full antialiased relative">
+  <div class="flex flex-wrap md:flex-nowrap shadow-lg rounded-lg w-full group cursor-pointer transform duration-500 hover:-translate-y-1 mx-auto rounded-xl overflow-hidden">
+    
+    <!-- Image Section -->
+    <img class="w-full h-auto md:w-[30%] object-cover max-h-[500px]" src="{{row.image_url}}" alt="">
+
+    <!-- Text Content Section -->
+    <div class="flex flex-col justify-between w-full md:w-[70%] relative">
+      <div class="p-5 pb-10 relative">
+
+        <!-- Edit and Delete Icons -->
+        {% if request.user.is_authenticated and is_manager %}
+        <div class="absolute top-0 right-0 mt-3 mr-3 flex space-x-3">
+          <!-- Edit Icon (link to edit page) -->
+          <a href="{% url 'admin_role:edit_restaurant' row.id %}" class="text-gray-500 hover:text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="gray" d="M7.127 22.562l-7.127 1.438 1.438-7.128 5.689 5.69zm1.414-1.414l11.228-11.225-5.69-5.692-11.227 11.227 5.689 5.69zm9.768-21.148l-2.816 2.817 5.691 5.691 2.816-2.819-5.691-5.689z"/>
+            </svg>
+          </a>
         </div>
-  
-        <!-- Bottom Section with Rating and Button -->
-        <div class="bg-blue-50 p-5">
-          <div class="sm:flex sm:justify-between">
-            <div>
-              <div class="text-lg text-gray-700">
-                <span class="text-gray-800 font-bold">{{row.street_address}}</span> {{ row.location }}
+        {% endif %}
+
+        <!-- Restaurant Name and Comments -->
+        <h1 class="text-2xl font-semibold text-gray-800 mt-4">
+          {{row.name}}
+        </h1>
+        <p class="text-xl text-gray-400 mt-2 leading-relaxed">
+          {{ row.comments }}
+        </p>
+      </div>
+
+      <!-- Bottom Section with Rating and Button -->
+      <div class="bg-blue-50 p-5">
+        <div class="sm:flex sm:justify-between">
+          <div>
+            <div class="text-lg text-gray-700">
+              <span class="text-gray-800 font-bold">{{row.street_address}}</span> {{ row.location }}
+            </div>
+
+            <!-- Rating Section -->
+            <div class="flex items-center">
+              <div class="flex">
+                  <!-- Include stars.html and pass the reviews_rating as filled_stars -->
+                  {% include 'stars.html' %}
               </div>
-  
-              <!-- Rating Section -->
-              <div class="flex items-center">
-                <div class="flex">
-                    <!-- Include stars.html and pass the reviews_rating as filled_stars -->
-                    {% include 'stars.html' %}
-                </div>
-                <div class="text-gray-600 ml-2 text-sm md:text-base mt-1">
-                    {{ row.reviews_rating }} reviews
-                </div>
+              <div class="text-gray-600 ml-2 text-sm md:text-base mt-1">
+                  {{ row.reviews_rating }} stars
+              </div>
             </div>
-            </div>
-  
-            <a href="{% url 'review:restaurant_details' row.id %}" 
-            rel="noopener noreferrer" 
-            class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-purple-700 hover:bg-purple-600 font-bold text-white md:text-lg rounded-lg shadow-md text-center">
-            View Details
-            </a>
           </div>
-  
-          <!-- Places to Visit -->
-          <div class="mt-3 text-gray-600 text-sm md:text-sm">
-            {{ row.contact_number }}
-          </div>
+
+          <a href="{% url 'review:restaurant_details' row.id %}" 
+          rel="noopener noreferrer" 
+          class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-purple-700 hover:bg-purple-600 font-bold text-white md:text-lg rounded-lg shadow-md text-center">
+          View Details
+          </a>
+        </div>
+
+        <!-- Contact Number -->
+        <div class="mt-3 text-gray-600 text-sm md:text-sm">
+          {{ row.contact_number }}
         </div>
       </div>
     </div>
-  </section
-  
+  </div>
+</section>

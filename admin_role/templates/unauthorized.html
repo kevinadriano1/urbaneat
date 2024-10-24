@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-2xl font-bold text-red-600">Unauthorized Access</h1>
+        <p class="mt-4 text-gray-600">You are not authorized to access this page.</p>
+        <a href="{% url 'main:show_main' %}" class="mt-6 inline-block bg-blue-600 text-white py-2 px-4 rounded">Go to Home</a>
+    </div>
+</body>
+{% endblock content %}

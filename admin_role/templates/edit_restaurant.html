@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8 flex flex-col items-center">
+    <h1 class="text-3xl font-semibold mb-6 text-center">Edit Restaurant</h1>
+
+    <form method="POST" class="bg-white shadow-lg rounded-lg p-12 w-full max-w-3xl">
+        {% csrf_token %}
+        <table class="w-full">
+            {{ form.as_table }}
+            <tr>
+                <td class="text-center" colspan="2">
+                    <div class="flex justify-between mt-4">
+                        <input type="submit" value="Save changes" 
+                               class="px-6 py-2 bg-black hover:bg-gray-800 text-white font-semibold rounded-md transition duration-300" />
+                        <button type="button" onclick="confirmDelete()" 
+                                class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md transition duration-300">
+                            Delete Restaurant
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script>
+    function confirmDelete() {
+        if (confirm("Are you sure you want to delete this restaurant?")) {
+            window.location.href = "{% url 'admin_role:delete_restaurant' food_entry.id %}";  
+        }
+    }
+</script>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        padding: 20px; 
+        text-align: left;
+    }
+    input[type="text"], 
+    input[type="email"], 
+    input[type="url"], 
+    input[type="number"], 
+    textarea {
+        border: 1px solid #ccc; /* Light gray border for input fields */
+        padding: 12px; /* Increased padding for input fields */
+        border-radius: 4px; /* Rounded corners for input fields */
+        width: 100%; /* Full width of the table cell */
+    }
+</style>
+
+{% endblock %}

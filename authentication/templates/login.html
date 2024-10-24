@@ -51,12 +51,18 @@
             <img src="https://images.unsplash.com/photo-1526361547623-9dd08c979bb1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105" alt="Restaurant Background" />
             
             <!-- Overlay -->
-            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-start p-8">
-                <img src="{% static 'image/Vector.png' %}" alt="UrbanEat Text" class="w-28 mb-2" />
-                <img src="{% static 'image/UrbanEat.png' %}" alt="UrbanEat Logo" class="w-32 mb-4" />
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-start items-start p-8">
+                <!-- Logo at the top -->
+                <img src="{% static 'image/White_logo.png' %}" alt="UrbanEat Text" class="w-28 mb-2" />
+            
+                <!-- Spacer to push content to the bottom -->
+                <div class="flex-grow"></div>
+            
+                <!-- Text content at the bottom -->
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-2">Welcome!</h2>
                 <p class="text-lg md:text-xl text-gray-200">Let's find you some good eats.</p>
             </div>
+            
         </div>
     </div>
 </body>

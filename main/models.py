@@ -15,7 +15,7 @@ class FoodEntry(models.Model):
     contact_number = models.CharField(max_length=50, default='N/A')  # For contact number
     trip_advisor_url = models.URLField(default='N/A')  # For the Trip Advisor URL
     menu_info = models.TextField(default='N/A')  # For menu info
- # For menu info
+    image_url = models.URLField(max_length = 255, default='N/A') # For image URL
 
 
     def __str__(self):
