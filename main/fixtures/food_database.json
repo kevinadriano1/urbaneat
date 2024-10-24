@@ -3,7 +3,7 @@
         "model": "main.foodentry",
         "pk": "653e517b-68db-450a-bbb8-e43f83cbee4c",
         "fields": {
-            "user": 1,
+            
             "name": "The Capital Grille",
             "street_address": "155 E 42nd St",
             "location": "New York City, NY 10017-5608",
@@ -21,7 +21,7 @@
         "model": "main.foodentry",
         "pk": "10990e33-34be-4518-a1a8-aaabb91b6ee7",
         "fields": {
-            "user": 1,
+            
             "name": "Murray's Cheese",
             "street_address": "254 Bleecker St",
             "location": "New York City, NY 10014-4101",
@@ -39,7 +39,7 @@
         "model": "main.foodentry",
         "pk": "96639c58-8900-4c05-a0ff-679796616e0b",
         "fields": {
-            "user": 1,
+            
             "name": "Daniel",
             "street_address": "60 East 65th Street",
             "location": "New York City, NY 10065-7056",
@@ -57,7 +57,7 @@
         "model": "main.foodentry",
         "pk": "85c7ea48-c1d5-41b4-b296-7a131d4d02f7",
         "fields": {
-            "user": 1,
+
             "name": "Los Tacos No. 1",
             "street_address": "229 W 43rd St",
             "location": "New York City, NY 10036-3982",
@@ -75,7 +75,7 @@
         "model": "main.foodentry",
         "pk": "d030a676-b495-4f86-8a8a-9fd281902bc7",
         "fields": {
-            "user": 1,
+            
             "name": "Red Rooster Harlem",
             "street_address": "310 Lenox Avenue",
             "location": "New York City, NY 10027-4449",
@@ -93,7 +93,7 @@
         "model": "main.foodentry",
         "pk": "f3fc87c2-789b-4c66-b067-9a960574cc52",
         "fields": {
-            "user": 1,
+            
             "name": "Numero 28 Pizzeria",
             "street_address": "28 Carmine St",
             "location": "New York City, NY 10014-4437",
@@ -111,7 +111,7 @@
         "model": "main.foodentry",
         "pk": "b93c097e-a07c-44fc-b206-33c5d189d084",
         "fields": {
-            "user": 1,
+            
             "name": "Atera",
             "street_address": "77 Worth St",
             "location": "New York City, NY 10013-3411",
@@ -129,7 +129,7 @@
         "model": "main.foodentry",
         "pk": "798109f2-5dca-4d5c-be0f-9d3aa019cd5a",
         "fields": {
-            "user": 1,
+            
             "name": "San Carlo Osteria Piemonte",
             "street_address": "90 Thompson St",
             "location": "New York City, NY 10012-3744",
@@ -147,7 +147,7 @@
         "model": "main.foodentry",
         "pk": "adcbf3e8-e195-4b3d-9786-608d290019c6",
         "fields": {
-            "user": 1,
+            
             "name": "Broadway Bagel",
             "street_address": "2658 Broadway",
             "location": "New York City, NY 10025-5023",
@@ -165,7 +165,7 @@
         "model": "main.foodentry",
         "pk": "490d4ee2-8ffd-445f-992a-7932f9db8929",
         "fields": {
-            "user": 1,
+            
             "name": "Smoke Jazz Club",
             "street_address": "2751 Broadway",
             "location": "New York City, NY 10025-2803",
@@ -183,7 +183,7 @@
         "model": "main.foodentry",
         "pk": "fb53be10-ae3e-4425-a23c-2e84b276a350",
         "fields": {
-            "user": 1,
+            
             "name": "Jungsik",
             "street_address": "2 Harrison St",
             "location": "New York City, NY 10013-2810",
@@ -201,7 +201,7 @@
         "model": "main.foodentry",
         "pk": "ac0c5d23-ebfb-4221-b853-1d7a920ae2b5",
         "fields": {
-            "user": 1,
+            
             "name": "Piccola Cucina Estiatorio",
             "street_address": "75 Thompson St",
             "location": "New York City, NY 10012-4345",
@@ -219,7 +219,7 @@
         "model": "main.foodentry",
         "pk": "19ad06fb-9be7-4844-b874-0b06f3784161",
         "fields": {
-            "user": 1,
+            
             "name": "Naruto Ramen",
             "street_address": "1596 3rd Ave",
             "location": "New York City, NY 10128-3417",
@@ -237,7 +237,7 @@
         "model": "main.foodentry",
         "pk": "21bbf15a-f0f2-45a5-9fb4-9ce4b9552bf2",
         "fields": {
-            "user": 1,
+            
             "name": "Boucherie West Village",
             "street_address": "99 7th Ave S",
             "location": "New York City, NY 10014-3415",
@@ -255,7 +255,7 @@
         "model": "main.foodentry",
         "pk": "36ef5fd2-a5a7-4813-aa61-d26b80e71826",
         "fields": {
-            "user": 1,
+            
             "name": "Dirt Candy",
             "street_address": "86 Allen St",
             "location": "New York City, NY 10002-3014",
@@ -273,7 +273,7 @@
         "model": "main.foodentry",
         "pk": "d965a68e-fd4a-4f46-a419-464e251a6e2c",
         "fields": {
-            "user": 1,
+            
             "name": "Buenos Aires",
             "street_address": "513 E 6th St",
             "location": "New York City, NY 10009-6621",
@@ -291,7 +291,7 @@
         "model": "main.foodentry",
         "pk": "c0655890-143a-443f-a787-15caeb498ad2",
         "fields": {
-            "user": 1,
+            
             "name": "Decoy Bar",
             "street_address": "529 1/2 Hudson St",
             "location": "New York City, NY 10014-2601",
@@ -309,7 +309,7 @@
         "model": "main.foodentry",
         "pk": "23945466-4abb-48fe-9e9c-115956635384",
         "fields": {
-            "user": 1,
+            
             "name": "John's Coffee Shop",
             "street_address": "823 2nd Ave",
             "location": "New York City, NY 10017-4501",
@@ -327,7 +327,7 @@
         "model": "main.foodentry",
         "pk": "b6697de9-46e3-48bd-9034-f7e9be2b379d",
         "fields": {
-            "user": 1,
+            
             "name": "Boucherie West Village",
             "street_address": "99 7th Ave S",
             "location": "New York City, NY 10014-3415",
@@ -345,7 +345,7 @@
         "model": "main.foodentry",
         "pk": "9b776206-c0ee-4e8d-8421-f9c88908a726",
         "fields": {
-            "user": 1,
+            
             "name": "Bleecker Street Pizza",
             "street_address": "69 7th Ave S",
             "location": "New York City, NY 10014-4043",
@@ -363,7 +363,7 @@
         "model": "main.foodentry",
         "pk": "38f42e57-5f39-4f5f-8506-ffbc98a059dc",
         "fields": {
-            "user": 1,
+            
             "name": "Pure Thai Cookhouse",
             "street_address": "766 9th Ave",
             "location": "New York City, NY 10019-6323",
@@ -381,7 +381,7 @@
         "model": "main.foodentry",
         "pk": "a447515c-7a22-4dfc-8e93-13441e3e777d",
         "fields": {
-            "user": 1,
+            
             "name": "Petite Boucherie",
             "street_address": "14 Christopher St",
             "location": "New York City, NY 10014-3523",
@@ -399,7 +399,7 @@
         "model": "main.foodentry",
         "pk": "2fdb4d20-96e0-4488-a45a-6f20d8577fef",
         "fields": {
-            "user": 1,
+            
             "name": "Rafele",
             "street_address": "29 7th Ave S",
             "location": "New York City, NY 10014-3938",
@@ -417,7 +417,7 @@
         "model": "main.foodentry",
         "pk": "87f8732c-4e8f-4c7c-8f92-93ebc707454f",
         "fields": {
-            "user": 1,
+            
             "name": "Blue Smoke Battery Park City",
             "street_address": "255 Vesey St",
             "location": "New York City, NY 10282-5800",
@@ -435,7 +435,7 @@
         "model": "main.foodentry",
         "pk": "9eaadda8-805a-4cef-8c80-b631825ef5a4",
         "fields": {
-            "user": 1,
+            
             "name": "Loi Estiatorio",
             "street_address": "132 W 58th St",
             "location": "New York City, NY 10019-2135",
@@ -453,7 +453,7 @@
         "model": "main.foodentry",
         "pk": "cadbb5af-111c-4691-8927-d24b456875f9",
         "fields": {
-            "user": 1,
+            
             "name": "Piccola Cucina Osteria",
             "street_address": "196 Spring St",
             "location": "New York City, NY 10012-3621",
@@ -471,7 +471,7 @@
         "model": "main.foodentry",
         "pk": "b1035f66-76a5-411f-9f9f-c8066d654360",
         "fields": {
-            "user": 1,
+            
             "name": "Bleecker Street Pizza",
             "street_address": "69 7th Ave S",
             "location": "New York City, NY 10014-4043",
@@ -489,7 +489,7 @@
         "model": "main.foodentry",
         "pk": "5f5f3b0c-acd6-420d-8db6-b162da8b95f1",
         "fields": {
-            "user": 1,
+            
             "name": "Faicco's Pork Store",
             "street_address": "260 Bleecker St",
             "location": "New York City, NY 10014-4128",
@@ -507,7 +507,7 @@
         "model": "main.foodentry",
         "pk": "d82f021d-6836-4373-87a7-39d7f2928c73",
         "fields": {
-            "user": 1,
+            
             "name": "B Side Pizzeria",
             "street_address": "370 W 51st St",
             "location": "New York City, NY 10019-6403",
@@ -525,7 +525,7 @@
         "model": "main.foodentry",
         "pk": "8d370121-13e9-49c0-b44b-a08f5222b35e",
         "fields": {
-            "user": 1,
+            
             "name": "Nerai",
             "street_address": "55 E 54th St",
             "location": "New York City, NY 10022-4206",
@@ -543,7 +543,7 @@
         "model": "main.foodentry",
         "pk": "0afde2d6-d0e6-40c8-b542-082ad3bd6f4e",
         "fields": {
-            "user": 1,
+            
             "name": "Amy Ruth's Home Style Southern Cuisine",
             "street_address": "113 W 116th St",
             "location": "New York City, NY 10026-2521",
@@ -561,7 +561,7 @@
         "model": "main.foodentry",
         "pk": "ddef13e6-2bfb-4169-8604-f2ea3bec3a23",
         "fields": {
-            "user": 1,
+            
             "name": "Bleecker Street Pizza",
             "street_address": "69 7th Ave S",
             "location": "New York City, NY 10014-4043",
@@ -579,7 +579,7 @@
         "model": "main.foodentry",
         "pk": "140ced77-9fbc-4553-a13f-89d0e4d3a086",
         "fields": {
-            "user": 1,
+            
             "name": "Manhatta",
             "street_address": "28 Liberty St",
             "location": "New York City, NY 10005-1400",
@@ -597,7 +597,7 @@
         "model": "main.foodentry",
         "pk": "ef158328-34ef-4af0-993d-4501a1bb42a2",
         "fields": {
-            "user": 1,
+            
             "name": "K Rico Steakhouse",
             "street_address": "772 9th Ave",
             "location": "New York City, NY 10019-6327",
@@ -615,7 +615,7 @@
         "model": "main.foodentry",
         "pk": "5c0f064b-ff8b-4f35-b6b8-275d5a893a58",
         "fields": {
-            "user": 1,
+            
             "name": "SottoCasa Pizzeria",
             "street_address": "227 Lenox Ave",
             "location": "New York City, NY 10027-6542",
@@ -633,7 +633,7 @@
         "model": "main.foodentry",
         "pk": "c2628f7e-e67a-46d6-8a31-e480f828b7aa",
         "fields": {
-            "user": 1,
+            
             "name": "Adrienne's Pizzabar",
             "street_address": "54 Stone St",
             "location": "New York City, NY 10004-2617",
@@ -651,7 +651,7 @@
         "model": "main.foodentry",
         "pk": "9dafa98a-abf1-4768-b19f-4580674313d9",
         "fields": {
-            "user": 1,
+            
             "name": "Spice Symphony",
             "street_address": "150 E 50th St",
             "location": "New York City, NY 10022-9500",
@@ -669,7 +669,7 @@
         "model": "main.foodentry",
         "pk": "0610ab5c-f25b-4684-9507-185e115a8a82",
         "fields": {
-            "user": 1,
+            
             "name": "Tomino - Taberna Gallega",
             "street_address": "192 Grand St",
             "location": "New York City, NY 10013-3712",
@@ -687,7 +687,7 @@
         "model": "main.foodentry",
         "pk": "60a261a2-c38f-4de8-976e-014d5067ef16",
         "fields": {
-            "user": 1,
+            
             "name": "Eileen's Special Cheesecake",
             "street_address": "17 Cleveland Pl",
             "location": "New York City, NY 10012-4052",
@@ -705,7 +705,7 @@
         "model": "main.foodentry",
         "pk": "358c7622-5564-453e-a70c-490add5d0c2b",
         "fields": {
-            "user": 1,
+            
             "name": "Petite Boucherie",
             "street_address": "14 Christopher St",
             "location": "New York City, NY 10014-3523",
@@ -723,7 +723,7 @@
         "model": "main.foodentry",
         "pk": "4cff61c6-0426-454a-8efd-de58fc599f45",
         "fields": {
-            "user": 1,
+            
             "name": "The Grange Bar & Eatery",
             "street_address": "1635 Amsterdam Ave",
             "location": "New York City, NY 10031-6103",
@@ -741,7 +741,7 @@
         "model": "main.foodentry",
         "pk": "845a1ea3-7525-4dd2-b665-091c0f456c58",
         "fields": {
-            "user": 1,
+            
             "name": "San Carlo Osteria Piemonte",
             "street_address": "90 Thompson St",
             "location": "New York City, NY 10012-3744",
@@ -759,7 +759,7 @@
         "model": "main.foodentry",
         "pk": "07636e68-5c6c-473e-a8cb-d47e0b9843b2",
         "fields": {
-            "user": 1,
+            
             "name": "Jungsik",
             "street_address": "2 Harrison St",
             "location": "New York City, NY 10013-2810",
@@ -777,7 +777,7 @@
         "model": "main.foodentry",
         "pk": "c68995b9-9028-41ba-ac2f-6937559ebed5",
         "fields": {
-            "user": 1,
+            
             "name": "Jacob Restaurant",
             "street_address": "373 Lennox Avenue",
             "location": "New York City, NY 10027",
@@ -795,7 +795,7 @@
         "model": "main.foodentry",
         "pk": "ae9777c6-4cb7-4d5b-9ebf-154805b1ed24",
         "fields": {
-            "user": 1,
+            
             "name": "Ceci Italian Restaurant & Bar",
             "street_address": "46 W 46th St",
             "location": "New York City, NY 10036-4508",
@@ -813,7 +813,7 @@
         "model": "main.foodentry",
         "pk": "a0660cdf-a4a7-4d56-b48b-a8f117d62d5e",
         "fields": {
-            "user": 1,
+            
             "name": "Loi Estiatorio",
             "street_address": "132 W 58th St",
             "location": "New York City, NY 10019-2135",
@@ -831,7 +831,7 @@
         "model": "main.foodentry",
         "pk": "83a7ec8c-cab3-4e85-886b-db9bfdb50065",
         "fields": {
-            "user": 1,
+            
             "name": "Angelina Bakery NYC",
             "street_address": "575 8th Ave",
             "location": "New York City, NY 10018-3011",
@@ -849,7 +849,7 @@
         "model": "main.foodentry",
         "pk": "44f92f0f-3456-436b-bd0d-a4dfcc3995b7",
         "fields": {
-            "user": 1,
+            
             "name": "Beyond Sushi",
             "street_address": "62 W 56th St",
             "location": "New York City, NY 10019-3824",
@@ -867,7 +867,7 @@
         "model": "main.foodentry",
         "pk": "64345a2e-8ee2-41cd-bab4-a2928bf89587",
         "fields": {
-            "user": 1,
+            
             "name": "Nick's",
             "street_address": "1814 2nd Ave",
             "location": "New York City, NY 10128-5601",
@@ -885,7 +885,7 @@
         "model": "main.foodentry",
         "pk": "47c0a2ba-ff69-4975-b094-6c0335ffc7ef",
         "fields": {
-            "user": 1,
+            
             "name": "Faicco's Pork Store",
             "street_address": "260 Bleecker St",
             "location": "New York City, NY 10014-4128",
@@ -903,7 +903,7 @@
         "model": "main.foodentry",
         "pk": "2dc88ea0-8d0e-4612-87e6-668588034ec8",
         "fields": {
-            "user": 1,
+            
             "name": "Sea Fire Grill",
             "street_address": "158 E 48th St",
             "location": "New York City, NY 10017-1224",
@@ -921,7 +921,7 @@
         "model": "main.foodentry",
         "pk": "35b274a8-b9c5-4da5-b5e1-7050002132bf",
         "fields": {
-            "user": 1,
+            
             "name": "Boucherie Union Square",
             "street_address": "225 Park Ave S",
             "location": "New York City, NY 10003-1604",
@@ -939,7 +939,7 @@
         "model": "main.foodentry",
         "pk": "dc1a290b-6f79-4a7b-9690-09996b15c80b",
         "fields": {
-            "user": 1,
+            
             "name": "Perry St",
             "street_address": "176 Perry St",
             "location": "New York City, NY 10014-2384",
@@ -957,7 +957,7 @@
         "model": "main.foodentry",
         "pk": "cdafd270-6b1b-4ba9-8edd-3bdaf09edb60",
         "fields": {
-            "user": 1,
+            
             "name": "San Carlo Osteria Piemonte",
             "street_address": "90 Thompson St",
             "location": "New York City, NY 10012-3744",
@@ -975,7 +975,7 @@
         "model": "main.foodentry",
         "pk": "4aaf2dfe-a96e-4412-a06f-cb1dcca7e8e5",
         "fields": {
-            "user": 1,
+            
             "name": "Ora Di Pasta",
             "street_address": "1 W 59 Th Street",
             "location": "New York City, NY 10019",
@@ -993,7 +993,7 @@
         "model": "main.foodentry",
         "pk": "5d014178-b95a-4d5f-aaea-12a3a5c012b8",
         "fields": {
-            "user": 1,
+            
             "name": "Russ & Daughters Cafe",
             "street_address": "127 Orchard St",
             "location": "New York City, NY 10002-3103",
@@ -1011,7 +1011,7 @@
         "model": "main.foodentry",
         "pk": "ade63efb-48c4-4a33-a750-a1021dd695a9",
         "fields": {
-            "user": 1,
+            
             "name": "Ora Di Pasta",
             "street_address": "1 W 59 Th Street",
             "location": "New York City, NY 10019",
@@ -1029,7 +1029,7 @@
         "model": "main.foodentry",
         "pk": "1fb22246-96f0-4e01-b7f5-408763b1c9da",
         "fields": {
-            "user": 1,
+            
             "name": "San Matteo Pizza Espresso Bar",
             "street_address": "1739 2nd Ave",
             "location": "New York City, NY 10128-3502",
@@ -1047,7 +1047,7 @@
         "model": "main.foodentry",
         "pk": "8ee537a2-41b9-4279-ab07-f74d3666145e",
         "fields": {
-            "user": 1,
+            
             "name": "Loi Estiatorio",
             "street_address": "132 W 58th St",
             "location": "New York City, NY 10019-2135",
@@ -1065,7 +1065,7 @@
         "model": "main.foodentry",
         "pk": "5b5949aa-6fd5-49f9-950e-bd8bfe62f14d",
         "fields": {
-            "user": 1,
+            
             "name": "Jungsik",
             "street_address": "2 Harrison St",
             "location": "New York City, NY 10013-2810",
@@ -1083,7 +1083,7 @@
         "model": "main.foodentry",
         "pk": "2fbe91ab-32cf-4e38-9fd2-4b543cba2b86",
         "fields": {
-            "user": 1,
+            
             "name": "Daniel",
             "street_address": "60 East 65th Street",
             "location": "New York City, NY 10065-7056",
@@ -1101,7 +1101,7 @@
         "model": "main.foodentry",
         "pk": "f78d452f-61ed-4bce-9efa-f79917baf6bb",
         "fields": {
-            "user": 1,
+            
             "name": "Whiskey Tavern",
             "street_address": "79 Baxter St",
             "location": "New York City, NY 10013-4462",
@@ -1119,7 +1119,7 @@
         "model": "main.foodentry",
         "pk": "bbfc23e7-b2fa-4bed-9705-c7b1492dd8cf",
         "fields": {
-            "user": 1,
+            
             "name": "The Modern",
             "street_address": "9 W 53rd St",
             "location": "New York City, NY 10019-5401",
@@ -1137,7 +1137,7 @@
         "model": "main.foodentry",
         "pk": "4fd7da32-8ad7-4013-86c2-aa4f97af9fa7",
         "fields": {
-            "user": 1,
+            
             "name": "Piccola Cucina Osteria",
             "street_address": "196 Spring St",
             "location": "New York City, NY 10012-3621",
@@ -1155,7 +1155,7 @@
         "model": "main.foodentry",
         "pk": "ce83443a-3fe5-4b2c-947a-97c2413bdf90",
         "fields": {
-            "user": 1,
+            
             "name": "Calle Dao Chelsea",
             "street_address": "461 W 23 Street",
             "location": "New York City, NY 10011",
@@ -1173,7 +1173,7 @@
         "model": "main.foodentry",
         "pk": "e7b57aa3-9d83-460d-b4ba-9dc25181f998",
         "fields": {
-            "user": 1,
+            
             "name": "Club A Steakhouse",
             "street_address": "240 E 58th Street",
             "location": "New York City, NY 10022-2001",
@@ -1191,7 +1191,7 @@
         "model": "main.foodentry",
         "pk": "549b7afb-9d4f-49f1-b375-9b731f3e6a58",
         "fields": {
-            "user": 1,
+            
             "name": "Spice Symphony",
             "street_address": "150 E 50th St",
             "location": "New York City, NY 10022-9500",
@@ -1209,7 +1209,7 @@
         "model": "main.foodentry",
         "pk": "c073e89b-e829-4456-9693-38b955652cf4",
         "fields": {
-            "user": 1,
+            
             "name": "Obao",
             "street_address": "647 9th Ave",
             "location": "New York City, NY 10036-3661",
@@ -1227,7 +1227,7 @@
         "model": "main.foodentry",
         "pk": "3a5e8934-f542-4298-a0e2-4b997fbc139e",
         "fields": {
-            "user": 1,
+            
             "name": "Boucherie West Village",
             "street_address": "99 7th Ave S",
             "location": "New York City, NY 10014-3415",
@@ -1245,7 +1245,7 @@
         "model": "main.foodentry",
         "pk": "0e6e0a38-5b2e-4fc2-84ae-a111f85e758f",
         "fields": {
-            "user": 1,
+            
             "name": "John's of Bleecker Street",
             "street_address": "278 Bleecker St",
             "location": "New York City, NY 10014-4105",
@@ -1263,7 +1263,7 @@
         "model": "main.foodentry",
         "pk": "fd443bc5-fe1e-48ee-8703-a391e611c9e6",
         "fields": {
-            "user": 1,
+            
             "name": "Blue Ribbon Sushi",
             "street_address": "119 Sullivan St",
             "location": "New York City, NY 10012-3680",
@@ -1281,7 +1281,7 @@
         "model": "main.foodentry",
         "pk": "045418c4-078f-4365-b3e4-0545cb78586c",
         "fields": {
-            "user": 1,
+            
             "name": "Broadway Bagel",
             "street_address": "2658 Broadway",
             "location": "New York City, NY 10025-5023",
@@ -1299,7 +1299,7 @@
         "model": "main.foodentry",
         "pk": "a1cd205c-3714-4592-8126-79795ea3e118",
         "fields": {
-            "user": 1,
+            
             "name": "Community Food & Juice",
             "street_address": "2893 Broadway",
             "location": "New York City, NY 10025-7820",
@@ -1317,7 +1317,7 @@
         "model": "main.foodentry",
         "pk": "58e1e736-995d-438a-a905-b611a380152e",
         "fields": {
-            "user": 1,
+            
             "name": "Scalini Fedeli",
             "street_address": "165 Duane St",
             "location": "New York City, NY 10013-3332",
@@ -1335,7 +1335,7 @@
         "model": "main.foodentry",
         "pk": "477afbc0-7018-47e2-ac1c-d1cf746ec81a",
         "fields": {
-            "user": 1,
+            
             "name": "Piccola Cucina Estiatorio",
             "street_address": "75 Thompson St",
             "location": "New York City, NY 10012-4345",
@@ -1353,7 +1353,7 @@
         "model": "main.foodentry",
         "pk": "d2a91d32-e14d-48f2-86c8-07afa2447c5f",
         "fields": {
-            "user": 1,
+            
             "name": "Amish Market East",
             "street_address": "240 E 45th St",
             "location": "New York City, NY 10017-3302",
@@ -1371,7 +1371,7 @@
         "model": "main.foodentry",
         "pk": "e49f07ac-856f-42c9-8be5-ab83c4b07de9",
         "fields": {
-            "user": 1,
+            
             "name": "Naruto Ramen",
             "street_address": "1596 3rd Ave",
             "location": "New York City, NY 10128-3417",
@@ -1389,7 +1389,7 @@
         "model": "main.foodentry",
         "pk": "272b57bf-d4e8-48b0-a2ca-0e7037041b2e",
         "fields": {
-            "user": 1,
+            
             "name": "Piccola Cucina Estiatorio",
             "street_address": "75 Thompson St",
             "location": "New York City, NY 10012-4345",
@@ -1407,7 +1407,7 @@
         "model": "main.foodentry",
         "pk": "e45c6a36-4cf1-4bc0-b9a5-843495777137",
         "fields": {
-            "user": 1,
+            
             "name": "San Carlo Osteria Piemonte",
             "street_address": "90 Thompson St",
             "location": "New York City, NY 10012-3744",
@@ -1425,7 +1425,7 @@
         "model": "main.foodentry",
         "pk": "b030cdcf-a12f-4994-ad49-f866362cdc0e",
         "fields": {
-            "user": 1,
+            
             "name": "Metro Diner",
             "street_address": "2641 Broadway Frnt 1",
             "location": "New York City, NY 10025-5043",
@@ -1443,7 +1443,7 @@
         "model": "main.foodentry",
         "pk": "c542e5d7-609b-4e99-b3d1-7e65b1cac794",
         "fields": {
-            "user": 1,
+            
             "name": "Spice Symphony",
             "street_address": "150 E 50th St",
             "location": "New York City, NY 10022-9500",
@@ -1461,7 +1461,7 @@
         "model": "main.foodentry",
         "pk": "be9e4d45-4759-4ea1-a07c-908cdd73ec40",
         "fields": {
-            "user": 1,
+            
             "name": "Loring Place",
             "street_address": "21 W 8th St",
             "location": "New York City, NY 10011-9032",
@@ -1479,7 +1479,7 @@
         "model": "main.foodentry",
         "pk": "8d8a85cc-fd36-40a3-8bdc-684851684d85",
         "fields": {
-            "user": 1,
+            
             "name": "Buenos Aires",
             "street_address": "513 E 6th St",
             "location": "New York City, NY 10009-6621",
@@ -1497,7 +1497,7 @@
         "model": "main.foodentry",
         "pk": "ea2886de-b974-44c5-86b9-77c038118573",
         "fields": {
-            "user": 1,
+            
             "name": "Sea Fire Grill",
             "street_address": "158 E 48th St",
             "location": "New York City, NY 10017-1224",
@@ -1515,7 +1515,7 @@
         "model": "main.foodentry",
         "pk": "6810b761-39be-4b14-b34f-43408933734b",
         "fields": {
-            "user": 1,
+            
             "name": "Flex Mussels",
             "street_address": "174 E 82nd St",
             "location": "New York City, NY 10028-1839",
@@ -1533,7 +1533,7 @@
         "model": "main.foodentry",
         "pk": "ccc1c2f7-d255-49a2-9208-1bb03ab83fc3",
         "fields": {
-            "user": 1,
+            
             "name": "Cull & Pistol",
             "street_address": "75 9th Ave",
             "location": "New York City, NY 10011-7006",
@@ -1551,7 +1551,7 @@
         "model": "main.foodentry",
         "pk": "ddafec4c-6bb3-4fa5-9910-6f5db391ad37",
         "fields": {
-            "user": 1,
+            
             "name": "Dinosaur Bar-B-Que",
             "street_address": "700 W 125th St",
             "location": "New York City, NY 10027-2314",
@@ -1569,7 +1569,7 @@
         "model": "main.foodentry",
         "pk": "e08808c6-bc2a-4886-b76f-a83d3a5914b1",
         "fields": {
-            "user": 1,
+            
             "name": "Piccola Cucina Estiatorio",
             "street_address": "75 Thompson St",
             "location": "New York City, NY 10012-4345",
@@ -1587,7 +1587,7 @@
         "model": "main.foodentry",
         "pk": "71cdb144-aac8-47d1-8ed6-d57b4099029c",
         "fields": {
-            "user": 1,
+            
             "name": "Pisticci",
             "street_address": "125 La Salle St",
             "location": "New York City, NY 10027-4651",
@@ -1605,7 +1605,7 @@
         "model": "main.foodentry",
         "pk": "2480a360-933b-4157-bd82-f66973ae4fde",
         "fields": {
-            "user": 1,
+            
             "name": "L'Artusi",
             "street_address": "228 W 10th St",
             "location": "New York City, NY 10014-6405",
@@ -1623,7 +1623,7 @@
         "model": "main.foodentry",
         "pk": "7412b968-0ac6-4b47-9494-e69358fba27a",
         "fields": {
-            "user": 1,
+            
             "name": "Piccola Cucina Osteria",
             "street_address": "196 Spring St",
             "location": "New York City, NY 10012-3621",
@@ -1641,7 +1641,7 @@
         "model": "main.foodentry",
         "pk": "0a9cb9e4-226a-4c09-a8f9-e04cd0c94691",
         "fields": {
-            "user": 1,
+            
             "name": "The Modern",
             "street_address": "9 W 53rd St",
             "location": "New York City, NY 10019-5401",
@@ -1659,7 +1659,7 @@
         "model": "main.foodentry",
         "pk": "1c349e06-b5b6-4d35-b5a4-29b391a99aa6",
         "fields": {
-            "user": 1,
+            
             "name": "Jacob Restaurant Soul Food & Salad Bar",
             "street_address": "2695 Frederick Douglass Blvd",
             "location": "New York City, NY 10030-1206",
@@ -1677,7 +1677,7 @@
         "model": "main.foodentry",
         "pk": "ea291352-a330-4cab-b647-d3e3173c82a4",
         "fields": {
-            "user": 1,
+            
             "name": "San Matteo Pizza Espresso Bar",
             "street_address": "1739 2nd Ave",
             "location": "New York City, NY 10128-3502",
@@ -1695,7 +1695,7 @@
         "model": "main.foodentry",
         "pk": "ec51aaad-3da2-4d54-afb0-01f8ea43371d",
         "fields": {
-            "user": 1,
+            
             "name": "SottoCasa Pizzeria",
             "street_address": "227 Lenox Ave",
             "location": "New York City, NY 10027-6542",
@@ -1713,7 +1713,7 @@
         "model": "main.foodentry",
         "pk": "d668b241-639a-43cf-912f-1521cbf32221",
         "fields": {
-            "user": 1,
+            
             "name": "Le Bernardin",
             "street_address": "155 W 51st St",
             "location": "New York City, NY 10019-6019",
@@ -1731,7 +1731,7 @@
         "model": "main.foodentry",
         "pk": "a4f72905-e860-4ead-91ef-c9ec15c429fa",
         "fields": {
-            "user": 1,
+            
             "name": "Daniel",
             "street_address": "60 East 65th Street",
             "location": "New York City, NY 10065-7056",
@@ -1749,7 +1749,7 @@
         "model": "main.foodentry",
         "pk": "dd7f96b9-2cbd-4d7f-b3cb-0c78c28f730a",
         "fields": {
-            "user": 1,
+            
             "name": "Club A Steakhouse",
             "street_address": "240 E 58th Street",
             "location": "New York City, NY 10022-2001",
@@ -1767,7 +1767,7 @@
         "model": "main.foodentry",
         "pk": "50f13ddf-1499-4b93-8bfa-81dbb40ea903",
         "fields": {
-            "user": 1,
+            
             "name": "Kuu Ramen",
             "street_address": "20 John St",
             "location": "New York City, NY 10038-4038",
@@ -1785,7 +1785,7 @@
         "model": "main.foodentry",
         "pk": "eb20ae03-f309-4575-aa39-d768979f3b00",
         "fields": {
-            "user": 1,
+            
             "name": "Manhatta",
             "street_address": "28 Liberty St",
             "location": "New York City, NY 10005-1400",
@@ -1803,7 +1803,7 @@
         "model": "main.foodentry",
         "pk": "862e404c-1d33-44b0-9eac-2476d02eb3db",
         "fields": {
-            "user": 1,
+            
             "name": "Ora Di Pasta",
             "street_address": "1 W 59 Th Street",
             "location": "New York City, NY 10019",
@@ -1821,7 +1821,7 @@
         "model": "main.foodentry",
         "pk": "28d0a763-cad8-4921-bd43-bcb036f8d998",
         "fields": {
-            "user": 1,
+            
             "name": "Faicco's Pork Store",
             "street_address": "260 Bleecker St",
             "location": "New York City, NY 10014-4128",
@@ -1839,7 +1839,7 @@
         "model": "main.foodentry",
         "pk": "e17f98a3-40f1-40ac-bf19-80a1b27a1de0",
         "fields": {
-            "user": 1,
+            
             "name": "Piccola Cucina Osteria",
             "street_address": "196 Spring St",
             "location": "New York City, NY 10012-3621",
@@ -1857,7 +1857,7 @@
         "model": "main.foodentry",
         "pk": "fd6f57b7-37bb-4cc2-aec5-e0c9ce0aa1b9",
         "fields": {
-            "user": 1,
+            
             "name": "SottoCasa Pizzeria",
             "street_address": "227 Lenox Ave",
             "location": "New York City, NY 10027-6542",
@@ -1875,7 +1875,7 @@
         "model": "main.foodentry",
         "pk": "58111905-3a0f-4215-903b-29e4d8f5f699",
         "fields": {
-            "user": 1,
+            
             "name": "Luke's Lobster- Upper East Side",
             "street_address": "242 E 81st St",
             "location": "New York City, NY 10028-2602",
@@ -1893,7 +1893,7 @@
         "model": "main.foodentry",
         "pk": "321c537b-b2ad-4de0-83d9-ea9cf3195323",
         "fields": {
-            "user": 1,
+            
             "name": "Maison Harlem",
             "street_address": "341 Saint Nicholas Ave",
             "location": "New York City, NY 10027-7602",
@@ -1911,7 +1911,7 @@
         "model": "main.foodentry",
         "pk": "507873f1-97bf-4474-a5f2-875ecdc1f56d",
         "fields": {
-            "user": 1,
+            
             "name": "Nick's",
             "street_address": "1814 2nd Ave",
             "location": "New York City, NY 10128-5601",
@@ -1929,7 +1929,7 @@
         "model": "main.foodentry",
         "pk": "919a7c0c-f078-4b9f-9e5b-d6155441e9dc",
         "fields": {
-            "user": 1,
+            
             "name": "Bemelmans Bar",
             "street_address": "35 E 76th St",
             "location": "New York City, NY 10021-1827",
@@ -1947,7 +1947,7 @@
         "model": "main.foodentry",
         "pk": "31a4ca2b-bb7f-47af-b8f1-4c7043657eba",
         "fields": {
-            "user": 1,
+            
             "name": "Tamarind - Tribeca",
             "street_address": "99 Hudson St",
             "location": "New York City, NY 10013-2815",
@@ -1965,7 +1965,7 @@
         "model": "main.foodentry",
         "pk": "eb9d9c60-1aab-4c8c-a3f1-6c4d4568ee10",
         "fields": {
-            "user": 1,
+            
             "name": "Jungsik",
             "street_address": "2 Harrison St",
             "location": "New York City, NY 10013-2810",
@@ -1983,7 +1983,7 @@
         "model": "main.foodentry",
         "pk": "d52e4f2f-5784-4f26-9064-88a7505e621c",
         "fields": {
-            "user": 1,
+            
             "name": "Kuu Ramen",
             "street_address": "20 John St",
             "location": "New York City, NY 10038-4038",
@@ -2001,7 +2001,7 @@
         "model": "main.foodentry",
         "pk": "ff25e496-0d60-4991-b8c8-535aa713525b",
         "fields": {
-            "user": 1,
+            
             "name": "Scalini Fedeli",
             "street_address": "165 Duane St",
             "location": "New York City, NY 10013-3332",
@@ -2019,7 +2019,7 @@
         "model": "main.foodentry",
         "pk": "02014330-5908-4553-8270-f44d96028c72",
         "fields": {
-            "user": 1,
+            
             "name": "Crave Fishbar",
             "street_address": "945 2nd Ave",
             "location": "New York City, NY 10022-7761",

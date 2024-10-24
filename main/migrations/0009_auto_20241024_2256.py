@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
         call_command("loaddata", "main/fixtures/food_database.json")
 
     dependencies = [
-        ('main', '0007_alter_foodentry_image_url'),
+        ('main', '0008_remove_foodentry_user'),
     ]
 
     operations = [
