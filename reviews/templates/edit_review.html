@@ -1,0 +1,12 @@
+<!-- edit_review.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit Review for {{ restaurant.name }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Review</button>
+</form>
+<a href="{% url 'review:restaurant_details' restaurant.pk %}">Cancel</a>
+{% endblock %}

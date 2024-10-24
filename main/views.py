@@ -25,35 +25,6 @@ def show_main(request):
         # If no search query, return all food entries
         food_entries = FoodEntry.objects.all()
 
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    
-    # Construct the full path to the CSV file
-    csv_file_path = os.path.join(base_dir, 'main', 'food_database.csv')
-    print(f"CSV file path: {csv_file_path}")
-
-    # Read the CSV content and populate the database if empty
-    if not FoodEntry.objects.exists():
-        try:
-            with open(csv_file_path, 'r', encoding='utf-8') as file:
-                reader = csv.DictReader(file)
-                for row in reader:
-                    food_entry = FoodEntry(
-                        user=request.user,  # Associate the current user with the entry
-                        name=row.get('Name', 'N/A'),  # Replace with your actual CSV headers
-                        street_address=row.get('Street_Address', 'N/A'),
-                        location=row.get('Location', 'N/A'),
-                        food_type=row.get('Type', 'N/A'),
-                        number_of_reviews=int(row.get('No_of_Reviews', 0)),  # Ensure it's an int
-                        reviews_rating=float(row.get('Reviews', 0)),
-                        comments=row.get('Comments', 'N/A'),
-                        contact_number=row.get('Contact_Number', 'N/A'),
-                        trip_advisor_url=row.get('Trip_advisor_Url', 'N/A'),
-                        menu_info=row.get('Menu', 'N/A'), 
-                        image_url=row.get('Image_url', 'N/A'),
-                    )
-                    food_entry.save()
-        except FileNotFoundError:
-            csv_content = None
 
     is_manager = request.user.groups.filter(name='Restaurant_Manager').exists()
     # Prepare context for the template
