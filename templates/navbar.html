@@ -16,25 +16,54 @@
           </button>
           <nav id="main-nav" class="fixed inset-y-0 right-0 transform translate-x-full md:relative md:translate-x-0 bg-gray-800 md:bg-transparent w-64 md:w-auto h-full md:h-auto overflow-y-auto md:overflow-visible transition-transform duration-300 ease-in-out md:transition-none">
               <ul class="pt-16 md:pt-0 px-4 md:px-0 md:flex space-y-2 md:space-y-0 md:space-x-4">
-                  <li class="flex items-center"><a href="{% url 'main:show_main' %}" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">Home</a></li>
-                  <li class="relative group flex items-center">  
-                  </li>
-                  <li class="flex items-center"><p class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">Welcome, {{ user.username }}!<p></li>
+                  <!-- Home Link -->
                   <li class="flex items-center">
-                    <a href="{% url 'profile' %}">
-                        {% if user.is_authenticated %}
-                            {% if user.profile.profile_picture %}
-                                <!-- Show User's Profile Picture -->
-                                <img src="{{ user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full object-cover" alt="Profile Picture">
-                            {% else %}
-                                <!-- Default Placeholder if no profile picture -->
-                                <img src="{% static 'image/default-profile.jpg' %}" class="w-10 h-10 rounded-full object-cover" alt="Default Profile Picture">
-                            {% endif %}
-                        {% endif %}
-                    </a>
+                      <a href="{% url 'main:show_main' %}" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200 {% if request.resolver_match.url_name == 'show_main' %}text-gray-300{% endif %}">Home</a>
+                  </li>
+                  
+                  <!-- Leaderboards Link (Visible to Authenticated Users Only) -->
+                  {% if user.is_authenticated %}
+                      <li class="flex items-center">
+                          <a href="{% url 'leaderboards:leaderboard' %}" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200 {% if request.resolver_match.url_name == 'leaderboard' %}text-gray-300{% endif %}">Leaderboards</a>
+                      </li>
+                  {% endif %}
+                  
+                  <!-- Welcome Message -->
+                  <li class="flex items-center">
+                      <p class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">Welcome, {{ user.username }}!</p>
+                  </li>
+                  
+                  <!-- Profile Picture Link -->
+                  <li class="flex items-center">
+                      <a href="{% url 'profile' %}">
+                          {% if user.is_authenticated %}
+                              {% if user.profile.profile_picture %}
+                                  <!-- Show User's Profile Picture -->
+                                  <img src="{{ user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full object-cover" alt="Profile Picture">
+                              {% else %}
+                                  <!-- Default Placeholder if no profile picture -->
+                                  <img src="{% static 'image/default-profile.jpg' %}" class="w-10 h-10 rounded-full object-cover" alt="Default Profile Picture">
+                              {% endif %}
+                          {% endif %}
+                      </a>
                   </li>
               </ul>
           </nav>
       </div>
   </div>
 </header>
+
+<script>
+  // Toggle the navigation menu on mobile
+  const menuToggle = document.getElementById('menu-toggle');
+  const mainNav = document.getElementById('main-nav');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  menuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('translate-x-full');
+      mainNav.classList.toggle('translate-x-0');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+  });
+</script>

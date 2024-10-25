@@ -26,8 +26,8 @@ def show_main(request):
     else:
         
         unique_food_entries = FoodEntry.objects.all()
-
-    
+        
+         
     is_manager = request.user.groups.filter(name='Restaurant_Manager').exists()
 
     

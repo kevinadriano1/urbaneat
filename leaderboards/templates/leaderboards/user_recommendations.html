@@ -1,0 +1,28 @@
+<!-- leaderboards/templates/leaderboards/user_recommendations.html -->
+
+{% if recommended_restaurants %}
+  <div class="recommendations">
+    {% for recommendation in recommended_restaurants %}
+      <div class="card">
+        <h3>{{ recommendation.restaurant.name }}</h3>
+        <p>Rating: 
+          {% if recommendation.user_review %}
+            {% for i in "12345" %}
+              {% if forloop.counter <= recommendation.user_review.rating %}
+                ★
+              {% else %}
+                ☆
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            No rating
+          {% endif %}
+        </p>
+        <p>{{ recommendation.restaurant.location }}</p>
+        <a href="{% url 'review:restaurant_details' recommendation.restaurant.id %}">View Details</a>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>You have not recommended any restaurants yet.</p>
+{% endif %}

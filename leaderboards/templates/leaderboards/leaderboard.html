@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-50 flex flex-col">
+  <h1 class="text-2xl font-semibold text-center text-gray-800 mb-6">Leaderboard & Recommendations</h1>
+  
+  <!-- Tabs Navigation -->
+  <div class="flex justify-center mb-4 space-x-2">
+    <button class="tablinks bg-gray-800 text-white px-4 py-2 rounded-full focus:outline-none focus:ring focus:ring-gray-500 transition duration-200 hover:bg-gray-900"
+            onclick="openTab(event, 'Leaderboard')" id="defaultOpen">Leaderboard</button>
+    <button class="tablinks bg-gray-800 text-white px-4 py-2 rounded-full focus:outline-none focus:ring focus:ring-gray-500 transition duration-200 hover:bg-gray-900"
+            onclick="openTab(event, 'Recommendations')">Your Recommendations</button>
+  </div>
+
+  <!-- Leaderboard Tab Content -->
+  <div id="Leaderboard" class="tabcontent bg-white shadow rounded-lg p-6">
+    {% if leaderboard %}
+      {% for food_type, restaurants in leaderboard.items %}
+        <h2 class="text-xl font-semibold text-gray-700 mt-6">{{ food_type }}</h2>
+        <table class="min-w-full bg-white border border-gray-300 mt-2">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 border-b text-left text-gray-600 font-semibold">Restaurant Name</th>
+              <th class="px-4 py-2 border-b text-left text-gray-600 font-semibold">Review Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for restaurant in restaurants %}
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2 border-b"><a href="{% url 'review:restaurant_details' restaurant.id %}" class="text-cyan-700 hover:underline">{{ restaurant.name }}</a></td>
+                <td class="px-4 py-2 border-b">{{ restaurant.reviews_rating|floatformat:1 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endfor %}
+    {% else %}
+      <p class="text-gray-600">No leaderboard data available. Please ensure there are restaurants with reviews.</p>
+    {% endif %}
+  </div>
+
+  <!-- Recommendations Tab Content -->
+  <div id="Recommendations" class="tabcontent bg-white shadow rounded-lg p-6">
+    {% include 'leaderboards/user_recommendations.html' %}
+  </div>
+
+  <script>
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Open the default tab
+    document.getElementById("defaultOpen").click();
+  </script>
+
+  <style>
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border-top: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+
+</div>
+{% include 'footer.html' %}
+{% endblock content %}
