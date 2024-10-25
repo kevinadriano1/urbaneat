@@ -15,30 +15,34 @@ from django.shortcuts import render, get_object_or_404
 
 @login_required(login_url='/auth/login/')
 def show_main(request):
-    # Get the search query from the URL parameters (search bar input)
-    query = request.GET.get('q')  # "q" is the query parameter
+    
+    query = request.GET.get('q') 
 
     if query:
-        # Filter food entries based on the search query (case-insensitive)
+        
         food_entries = FoodEntry.objects.filter(name__icontains=query)
+        
+        unique_food_entries = {entry.name: entry for entry in food_entries}.values()
     else:
-        # If no search query, return all food entries
-        food_entries = FoodEntry.objects.all()
+        
+        unique_food_entries = FoodEntry.objects.all()
 
-
+    
     is_manager = request.user.groups.filter(name='Restaurant_Manager').exists()
-    # Prepare context for the template
+
+    
     context = {
         'npm': '2306170414',
         'name': request.user.username,
         'class': 'PBP KKI',
-        'food_entries': food_entries,  # Adding the queried (filtered) food entries to the context
+        'food_entries': unique_food_entries,  
         'star_range': range(5),
         'last_login': request.COOKIES.get('last_login', 'Not set'),
         'is_manager': is_manager, 
     }
 
     return render(request, "main.html", context)
+
 
 def show_xml(request):
     data = FoodEntry.objects.all()

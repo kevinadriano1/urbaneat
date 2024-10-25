@@ -1,139 +1,250 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews for {{ restaurant.name }}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Basic styles for the modal */
-        #review-modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+        /* Consistent color styling with light theme */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9; /* Light gray background */
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .restaurant-info {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff; /* White card background */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Soft shadow */
+        }
+
+        .restaurant-info p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            color: #5d5d5d;
+        }
+
+        a {
+            color: #007bff; /* Modern blue link */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
             width: 100%;
-            height: 100%;
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow on images */
         }
-        #modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
+
+        .btn {
+            display: inline-block;
+            background-color: #007bff; /* Consistent blue button */
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            text-align: center;
+            transition: background-color 0.3s;
         }
+
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .reviews-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+
+        .reviews-list li {
+            background-color: #f9f9f9; /* Light gray for reviews */
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Soft shadow for reviews */
+        }
+
+        .actions a {
+            color: #007bff; /* Link color for edit/delete */
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+
+        /* Modal Styling */
+        .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .modal-content textarea, 
+        .modal-content input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #close-modal {
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #ff7043;
+            float: right;
+        }
+
     </style>
 </head>
 <body>
-    <h1>{{ restaurant.name }}</h1>
+    <div class="restaurant-info">
+        <h1>{{ restaurant.name }}</h1>
 
+        <p><strong>Street Address:</strong> {{ restaurant.street_address }}</p>
+        <p><strong>Location:</strong> {{ restaurant.location }}</p>
+        <p><strong>Type:</strong> {{ restaurant.food_type }}</p>
 
-    <p>Street Address: {{ restaurant.street_address }}</p>
-    <p>Location: {{ restaurant.location }}</p>
-    <p>Type: {{ restaurant.food_type }}</p>
-
-
-    <p>Contact Number: {{ restaurant.contact_number }}</p>
-    <p>
-        Trip Advisor URL: <a href="{{ restaurant.trip_advisor_url }}" target="_blank">View</a>
-    </p>
-    <p>
-        Menu: 
-        {% if restaurant.menu_info != "Check The Website for a Menu" %}
-            <a href="{{ restaurant.menu_info }}" target="_blank">View Menu</a>
-        {% else %}
-            No menu available.
-        {% endif %}
-    </p>
-    <p>
+        <p><strong>Contact Number:</strong> {{ restaurant.contact_number }}</p>
+        <p>
+            <strong>Trip Advisor URL:</strong> 
+            <a href="{{ restaurant.trip_advisor_url }}" target="_blank">View</a>
+        </p>
+        <p>
+            <strong>Menu:</strong> 
+            {% if restaurant.menu_info != "Check The Website for a Menu" %}
+                <a href="{{ restaurant.menu_info }}" target="_blank">View Menu</a>
+            {% else %}
+                No menu available.
+            {% endif %}
+        </p>
         <img src="{{ restaurant.image_url }}" alt="{{ restaurant.name }} image">
-    </p>
 
-    <ul id="reviews-list">
-        <li>
-            Rating: {{ restaurant.reviews_rating }}<br>
-            Comment: {{ restaurant.comments }}<br
-        </li>
-        {% for review in reviews %}
+        <ul class="reviews-list">
             <li>
-                Rating: {{ review.rating }}<br>
-                Comment: {{ review.comment }}<br>
-                {% if review.user == request.user %}
-                <div class="actions">
-                    <a href="{% url 'review:delete_review' pk=review.pk %}">Delete</a>
-                    <a href="{% url 'review:edit_review' pk=review.pk %}">Edit</a>
-                </div>
-                {% endif %}
+                <strong>Rating:</strong> {{ restaurant.reviews_rating }}<br>
+                <strong>Comment:</strong> {{ restaurant.comments }}
             </li>
-        {% endfor %}
-    </ul>
-    <button id="open-modal">Add a Review</button>
-    <a href="{% url 'main:show_main' %}">Back to Restaurant List</a>
+            {% for review in reviews %}
+                <li>
+                    <strong>Rating:</strong> {{ review.rating }}<br>
+                    <strong>Comment:</strong> {{ review.comment }}<br>
+                    {% if review.user == request.user %}
+                    <div class="actions">
+                        <a href="{% url 'review:delete_review' pk=review.pk %}">Delete</a>
+                        <a href="{% url 'review:edit_review' pk=review.pk %}">Edit</a>
+                    </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button class="btn" id="open-modal">Add a Review</button>
+        <a class="btn" href="{% url 'main:show_main' %}">Back to Restaurant List</a>
+    </div>
 
     <!-- The Modal -->
-    <div id="review-modal">
-        <div id="modal-content">
-            <span id="close-modal" style="float:right;">&times;</span>
+    <div id="review-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal">&times;</span>
             <h2>Add Review</h2>
             <form id="add-review-form" action="{% url 'review:add_review' restaurant.id %}" method="post">
                 {% csrf_token %}
                 <label for="id_rating">Rating:</label>
-                <input type="number" id="id_rating" name="rating" min="1" max="5" required><br><br>
+                <input type="number" id="id_rating" name="rating" min="1" max="5" required>
 
                 <label for="id_comment">Comment:</label>
-                <textarea id="id_comment" name="comment" rows="4" cols="40" required></textarea><br><br>
+                <textarea id="id_comment" name="comment" rows="4" required></textarea>
 
-                <button type="submit">Submit Review</button>
+                <button class="btn" type="submit">Submit Review</button>
             </form>
         </div>
     </div>
 
-
-
-
-
     <script>
-        // Open the modal
+        // Open modal
         $('#open-modal').on('click', function() {
             $('#review-modal').fadeIn();
         });
 
-        // Close the modal
+        // Close modal
         $('#close-modal').on('click', function() {
             $('#review-modal').fadeOut();
         });
 
         // AJAX form submission
         $('#add-review-form').on('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting the traditional way
+            event.preventDefault();
 
             $.ajax({
                 type: 'POST',
-                url: $(this).attr('action'), // Get the form action URL
-                data: $(this).serialize(), // Serialize the form data
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
                 success: function(response) {
                     if (response.success) {
                         $('#reviews-list').append(`
                             <li>
-                                Rating: ${response.rating}<br>
-                                Comment: ${response.comment}<br>
+                                <strong>Rating:</strong> ${response.rating}<br>
+                                <strong>Comment:</strong> ${response.comment}<br>
                                 <div class="actions">
                                     <a href="#">Delete</a>
                                     <a href="#">Edit</a>
                                 </div>
                             </li>
                         `);
-                        $('#add-review-form')[0].reset(); // Clear the form
-                        $('#review-modal').fadeOut(); // Close the modal
+                        $('#add-review-form')[0].reset();
+                        $('#review-modal').fadeOut();
                     } else {
-                        // Handle errors (optional)
                         alert('Error: ' + response.errors);
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('AJAX Error:', error); // Log AJAX error
+                    console.error('AJAX Error:', error);
                 }
             });
         });
