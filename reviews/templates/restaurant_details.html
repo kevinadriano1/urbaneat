@@ -207,6 +207,7 @@
     </div>
 
     <script>
+        $('#review-modal').hide();
         // Open modal
         $('#open-modal').on('click', function() {
             $('#review-modal').fadeIn();
@@ -227,7 +228,8 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     if (response.success) {
-                        $('#reviews-list').append(`
+                        // Append the new review without reloading the page
+                        $('.reviews-list').append(`
                             <li>
                                 <strong>Rating:</strong> ${response.rating}<br>
                                 <strong>Comment:</strong> ${response.comment}<br>
@@ -237,8 +239,8 @@
                                 </div>
                             </li>
                         `);
-                        $('#add-review-form')[0].reset();
-                        $('#review-modal').fadeOut();
+                        $('#add-review-form')[0].reset(); // Clear form inputs
+                        $('#review-modal').fadeOut(); // Close modal
                     } else {
                         alert('Error: ' + response.errors);
                     }

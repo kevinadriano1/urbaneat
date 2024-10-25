@@ -5,6 +5,7 @@ from .models import Review
 from main.models import FoodEntry
 from .forms import ReviewForm
 from django.http import JsonResponse
+from django.db.models import Avg
 
 def restaurant_details(request, pk):
     restaurant = get_object_or_404(FoodEntry, pk=pk)
@@ -20,6 +21,14 @@ def add_review(request, pk):
             review.restaurant = restaurant  # Assign the restaurant to the review
             review.user = request.user  # Set the user as the current logged-in user
             review.save()
+
+            # Calculate the average rating
+            average_rating = restaurant.reviews.aggregate(Avg('rating'))['rating__avg']
+
+            # Update the restaurant's reviews_rating field
+            restaurant.reviews_rating = average_rating if average_rating is not None else 0.0
+            restaurant.number_of_reviews = restaurant.reviews.count()  # Update the number of reviews
+            restaurant.save()
 
             # Return a JSON response for AJAX
             return JsonResponse({
