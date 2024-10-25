@@ -2,81 +2,136 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-50 flex flex-col">
-  <h1 class="text-2xl font-semibold text-center text-gray-800 mb-6">Leaderboard & Recommendations</h1>
+<div class="min-h-screen bg-gray-50 px-4 md:px-8 pt-24 pb-8 flex flex-col">
+  <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-12">Leaderboard & Recommendations</h1>
   
   <!-- Tabs Navigation -->
-  <div class="flex justify-center mb-4 space-x-2">
-    <button class="tablinks bg-gray-800 text-white px-4 py-2 rounded-full focus:outline-none focus:ring focus:ring-gray-500 transition duration-200 hover:bg-gray-900"
-            onclick="openTab(event, 'Leaderboard')" id="defaultOpen">Leaderboard</button>
-    <button class="tablinks bg-gray-800 text-white px-4 py-2 rounded-full focus:outline-none focus:ring focus:ring-gray-500 transition duration-200 hover:bg-gray-900"
-            onclick="openTab(event, 'Recommendations')">Your Recommendations</button>
+  <nav class="flex justify-center mb-10 space-x-6" role="tablist">
+    <button 
+      class="tab-button relative px-6 py-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition transform hover:scale-105 flex items-center space-x-2"
+      onclick="openTab(event, 'Leaderboard')" 
+      id="defaultOpen" 
+      aria-selected="true" 
+      role="tab"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v2H3V3zm0 6h18v2H3V9zm0 6h18v2H3v-2z" />
+      </svg>
+      <span>Leaderboard</span>
+    </button>
+    <button 
+      class="tab-button relative px-6 py-3 bg-gray-200 text-gray-800 rounded-full shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 transition transform hover:scale-105 flex items-center space-x-2"
+      onclick="openTab(event, 'Recommendations')" 
+      aria-selected="false" 
+      role="tab"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6a2 2 0 114 0v6m6 0v-2a4 4 0 00-8 0v2m8 0H5" />
+      </svg>
+      <span>Your Recommendations</span>
+    </button>
+  </nav>
+
+  <!-- Tabs Content -->
+  <div class="bg-white shadow-lg rounded-2xl p-8">
+    
+    <!-- Leaderboard Tab Content -->
+    <section id="Leaderboard" class="tab-content">
+      {% if leaderboard %}
+        {% for food_type, restaurants in leaderboard.items %}
+          <div class="mt-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-6">{{ food_type }}</h2>
+            <ul class="space-y-4">
+              {% for restaurant in restaurants %}
+                <li class="bg-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-4 flex items-center justify-between">
+                  <!-- Restaurant Information -->
+                  <div class="flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 4a8 8 0 100 16 8 8 0 000-16z" />
+                    </svg>
+                    <a href="{% url 'review:restaurant_details' restaurant.id %}" class="text-lg font-medium text-gray-800 hover:text-gray-600 truncate" title="{{ restaurant.name }}">
+                      {{ restaurant.name }}
+                    </a>
+                  </div>
+                  <!-- Review Rating -->
+                  <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.177c.969 0 1.371 1.24.588 1.81l-3.386 2.46a1 1 0 00-.364 1.118l1.286 3.974c.3.921-.755 1.688-1.54 1.118l-3.386-2.46a1 1 0 00-1.176 0l-3.386 2.46c-.784.57-1.838-.197-1.54-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.64 9.4c-.783-.57-.38-1.81.588-1.81h4.177a1 1 0 00.95-.69l1.286-3.974z" />
+                    </svg>
+                    <span class="text-gray-700">{{ restaurant.reviews_rating|floatformat:1 }}</span>
+                    <!-- Optional: Badge or Label -->
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold 
+                      {% if restaurant.reviews_rating >= 4 %}
+                        bg-green-200 text-green-800
+                      {% elif restaurant.reviews_rating >= 3 %}
+                        bg-yellow-200 text-yellow-800
+                      {% else %}
+                        bg-red-200 text-red-800
+                      {% endif %}
+                    ">
+                      {% if restaurant.reviews_rating >= 4 %}
+                        Excellent
+                      {% elif restaurant.reviews_rating >= 3 %}
+                        Good
+                      {% else %}
+                        Needs Improvement
+                      {% endif %}
+                    </span>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="flex flex-col items-center justify-center h-64 space-y-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          <p class="text-xl text-gray-600">No leaderboard data available. Please ensure there are restaurants with reviews.</p>
+        </div>
+      {% endif %}
+    </section>
+
+    <!-- Recommendations Tab Content -->
+    <section id="Recommendations" class="tab-content hidden">
+      {% include 'leaderboards/user_recommendations.html' %}
+    </section>
+
   </div>
 
-  <!-- Leaderboard Tab Content -->
-  <div id="Leaderboard" class="tabcontent bg-white shadow rounded-lg p-6">
-    {% if leaderboard %}
-      {% for food_type, restaurants in leaderboard.items %}
-        <h2 class="text-xl font-semibold text-gray-700 mt-6">{{ food_type }}</h2>
-        <table class="min-w-full bg-white border border-gray-300 mt-2">
-          <thead>
-            <tr>
-              <th class="px-4 py-2 border-b text-left text-gray-600 font-semibold">Restaurant Name</th>
-              <th class="px-4 py-2 border-b text-left text-gray-600 font-semibold">Review Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for restaurant in restaurants %}
-              <tr class="hover:bg-gray-50">
-                <td class="px-4 py-2 border-b"><a href="{% url 'review:restaurant_details' restaurant.id %}" class="text-cyan-700 hover:underline">{{ restaurant.name }}</a></td>
-                <td class="px-4 py-2 border-b">{{ restaurant.reviews_rating|floatformat:1 }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      {% endfor %}
-    {% else %}
-      <p class="text-gray-600">No leaderboard data available. Please ensure there are restaurants with reviews.</p>
-    {% endif %}
-  </div>
-
-  <!-- Recommendations Tab Content -->
-  <div id="Recommendations" class="tabcontent bg-white shadow rounded-lg p-6">
-    {% include 'leaderboards/user_recommendations.html' %}
-  </div>
-
+  <!-- JavaScript for Tabs -->
   <script>
     function openTab(evt, tabName) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
+      // Hide all tab contents
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabContents.forEach(content => content.classList.add('hidden'));
+
+      // Remove active styles from all tab buttons
+      const tabButtons = document.querySelectorAll('.tab-button');
+      tabButtons.forEach(button => {
+        button.classList.remove('bg-gray-800', 'text-white', 'ring-gray-500', 'shadow-xl', 'transform', 'scale-105');
+        button.classList.add('bg-gray-200', 'text-gray-800', 'shadow-md', 'transform', 'scale-100');
+        button.setAttribute('aria-selected', 'false');
+      });
+
+      // Show the selected tab content
+      document.getElementById(tabName).classList.remove('hidden');
+
+      // Add active styles to the clicked tab button
+      evt.currentTarget.classList.remove('bg-gray-200', 'text-gray-800', 'shadow-md', 'transform', 'scale-100');
+      evt.currentTarget.classList.add('bg-gray-800', 'text-white', 'ring-gray-500', 'shadow-xl', 'transform', 'scale-105');
+      evt.currentTarget.setAttribute('aria-selected', 'true');
     }
 
-    // Open the default tab
-    document.getElementById("defaultOpen").click();
+    // Automatically click the default tab on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const defaultTab = document.getElementById('defaultOpen');
+      if (defaultTab) {
+        defaultTab.click();
+      }
+    });
   </script>
-
-  <style>
-    .tabcontent {
-      display: none;
-      padding: 6px 12px;
-      border-top: none;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-  </style>
 
 </div>
 {% include 'footer.html' %}
