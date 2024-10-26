@@ -1,210 +1,222 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
+
+{% block meta %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews for {{ restaurant.name }}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        /* Consistent color styling with light theme */
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9; /* Light gray background */
-            color: #333;
-        }
+    
+{% endblock meta %}
 
-        h1 {
-            text-align: center;
-            font-size: 2rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
+{% block content %}
+{% include 'navbar.html' %}
+<div class="restaurant-info">
+    <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-12">{{ restaurant.name }}</h1>
 
-        .restaurant-info {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: #fff; /* White card background */
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Soft shadow */
-        }
+    <p><strong>Street Address:</strong> {{ restaurant.street_address }}</p>
+    <p><strong>Location:</strong> {{ restaurant.location }}</p>
+    <p><strong>Type:</strong> {{ restaurant.food_type }}</p>
 
-        .restaurant-info p {
-            font-size: 1.1rem;
-            margin: 10px 0;
-            color: #5d5d5d;
-        }
+    <p><strong>Contact Number:</strong> {{ restaurant.contact_number }}</p>
+    <p>
+        <strong>Trip Advisor URL:</strong>
+        <a href="{{ restaurant.trip_advisor_url }}" target="_blank">View</a>
+    </p>
+    <p>
+        <strong>Menu:</strong>
+        {% if restaurant.menu_info != "Check The Website for a Menu" %}
+            <a href="{{ restaurant.menu_info }}" target="_blank">View Menu</a>
+        {% else %}
+            No menu available.
+        {% endif %}
+    </p>
+    <img src="{{ restaurant.image_url }}" alt="{{ restaurant.name }} image">
 
-        a {
-            color: #007bff; /* Modern blue link */
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        img {
-            width: 100%;
-            border-radius: 8px;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow on images */
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: #007bff; /* Consistent blue button */
-            color: white;
-            padding: 12px 20px;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 20px;
-            text-align: center;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-
-        .reviews-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 30px;
-        }
-
-        .reviews-list li {
-            background-color: #f9f9f9; /* Light gray for reviews */
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Soft shadow for reviews */
-        }
-
-        .actions a {
-            color: #007bff; /* Link color for edit/delete */
-            font-size: 0.9rem;
-            margin-right: 10px;
-        }
-
-        /* Modal Styling */
-        .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 500px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-}
-
-        .modal-content h2 {
-            margin-top: 0;
-        }
-
-        .modal-content label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-
-        .modal-content textarea, 
-        .modal-content input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        #close-modal {
-            cursor: pointer;
-            font-size: 1.5em;
-            color: #ff7043;
-            float: right;
-        }
-
-    </style>
-</head>
-<body>
-    <div class="restaurant-info">
-        <h1>{{ restaurant.name }}</h1>
-
-        <p><strong>Street Address:</strong> {{ restaurant.street_address }}</p>
-        <p><strong>Location:</strong> {{ restaurant.location }}</p>
-        <p><strong>Type:</strong> {{ restaurant.food_type }}</p>
-
-        <p><strong>Contact Number:</strong> {{ restaurant.contact_number }}</p>
-        <p>
-            <strong>Trip Advisor URL:</strong> 
-            <a href="{{ restaurant.trip_advisor_url }}" target="_blank">View</a>
-        </p>
-        <p>
-            <strong>Menu:</strong> 
-            {% if restaurant.menu_info != "Check The Website for a Menu" %}
-                <a href="{{ restaurant.menu_info }}" target="_blank">View Menu</a>
-            {% else %}
-                No menu available.
-            {% endif %}
-        </p>
-        <img src="{{ restaurant.image_url }}" alt="{{ restaurant.name }} image">
-
-        <ul class="reviews-list">
+    <ul class="reviews-list">
+        <li>
+            <strong>Rating:</strong> {{ restaurant.reviews_rating }}<br>
+            <strong>Comment:</strong> {{ restaurant.comments }}
+        </li>
+        {% for review in reviews %}
             <li>
-                <strong>Rating:</strong> {{ restaurant.reviews_rating }}<br>
-                <strong>Comment:</strong> {{ restaurant.comments }}
+                <strong>Rating:</strong> {{ review.rating }}<br>
+                <strong>Comment:</strong> {{ review.comment }}<br>
+                {% if review.user == request.user %}
+                <div class="actions">
+                    <a href="{% url 'review:delete_review' pk=review.pk %}">Delete</a>
+                    <a href="{% url 'review:edit_review' pk=review.pk %}">Edit</a>
+                </div>
+                {% endif %}
             </li>
-            {% for review in reviews %}
-                <li>
-                    <strong>Rating:</strong> {{ review.rating }}<br>
-                    <strong>Comment:</strong> {{ review.comment }}<br>
-                    {% if review.user == request.user %}
-                    <div class="actions">
-                        <a href="{% url 'review:delete_review' pk=review.pk %}">Delete</a>
-                        <a href="{% url 'review:edit_review' pk=review.pk %}">Edit</a>
-                    </div>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+        {% endfor %}
+    </ul>
 
-        <button class="btn" id="open-modal">Add a Review</button>
-        <a class="btn" href="{% url 'main:show_main' %}">Back to Restaurant List</a>
+    <button class="mt-3 sm:mt-0 py-2 px-5 md:py-3 md:px-6 bg-cyan-700 hover:bg-cyan-800 font-bold text-white md:text-lg rounded-lg shadow-md text-center" id="open-modal">Add a Review</button>
+    
+</div>
+
+<!-- The Modal -->
+<div id="review-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-modal">&times;</span>
+        <h2>Add Review</h2>
+        <form id="add-review-form" action="{% url 'review:add_review' restaurant.id %}" method="post">
+            {% csrf_token %}
+            <label for="id_rating">Rating:</label>
+            <input type="number" id="id_rating" name="rating" min="1" max="5" required>
+
+            <label for="id_comment">Comment:</label>
+            <textarea id="id_comment" name="comment" rows="4" required></textarea>
+
+            <button class="btn" type="submit">Submit Review</button>
+        </form>
     </div>
+</div>
 
-    <!-- The Modal -->
-    <div id="review-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal">&times;</span>
-            <h2>Add Review</h2>
-            <form id="add-review-form" action="{% url 'review:add_review' restaurant.id %}" method="post">
-                {% csrf_token %}
-                <label for="id_rating">Rating:</label>
-                <input type="number" id="id_rating" name="rating" min="1" max="5" required>
+<style>
+    .button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9fafb;
+        color: #333;
+    }
 
-                <label for="id_comment">Comment:</label>
-                <textarea id="id_comment" name="comment" rows="4" required></textarea>
+    .restaurant-info {
+    max-width: 800px;
+    margin: 80px auto 40px; /* Increase the top margin to create space below the navbar */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
-                <button class="btn" type="submit">Submit Review</button>
-            </form>
-        </div>
-    </div>
+    .restaurant-info h1 {
+        color: #2c3e50;
+        font-size: 2.4rem;
+        margin-bottom: 20px;
+    }
+
+    .restaurant-info p {
+        font-size: 1.1rem;
+        color: #5d5d5d;
+        margin: 8px 0;
+    }
+
+    .restaurant-info a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .restaurant-info a:hover {
+        text-decoration: underline;
+    }
+
+    .restaurant-info img {
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        border: none;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .reviews-list {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 30px;
+        text-align: left;
+    }
+
+    .reviews-list li {
+        background-color: #f1f3f5;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .actions a {
+        color: #007bff;
+        font-size: 0.9rem;
+        margin-right: 10px;
+    }
+
+    /* Modal Styling */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+    .modal-content h2 {
+        margin-top: 0;
+        font-size: 1.8rem;
+        color: #333;
+    }
+
+    .modal-content label {
+        display: block;
+        font-weight: 600;
+        color: #555;
+        margin: 10px 0 5px;
+    }
+
+    .modal-content input[type="number"],
+    .modal-content textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+    }
+
+    #close-modal {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #ff7043;
+        float: right;
+    }
+</style>
 
     <script>
         $('#review-modal').hide();
@@ -251,5 +263,5 @@
             });
         });
     </script>
-</body>
-</html>
+{% include 'footer.html' %}
+{% endblock content %}

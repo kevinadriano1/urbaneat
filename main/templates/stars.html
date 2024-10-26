@@ -1,45 +1,19 @@
-<div class="flex">
-  {% if row.reviews_rating %}
-      {% with full_stars=row.reviews_rating|floatformat:0 %}  {# Get the number of full stars #}
-          {% with has_half_star=row.reviews_rating|add:"-full_stars" %}
-              {% for star in "01234" %}  {# Loop over the range for 5 stars #}
-                  {% if star|add:0 < full_stars %}  {# Full star condition #}
-                      <!-- Full star -->
-                      <svg
-                          class="w-5 h-5 text-green-500"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          aria-hidden="true"
-                      >
-                          <path d="M10 15.27L16.18 20l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 5.73L3.82 20z" />
-                      </svg>
-                  {% elif star|add:0 == full_stars and has_half_star|floatformat:1 >= 0.5 %}  {# Half star condition #}
-                      <!-- Half star -->
-                      <svg
-                          class="w-5 h-5 text-green-500"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          aria-hidden="true"
-                      >
-                          <path d="M10 15.27L16.18 20l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 5.73L3.82 20z" />
-                          <path d="M10 0l2.39 6.63 7.19.61-5.46 5.73 1.64 7.03L10 15.27 3.82 20l1.64-7.03L0 7.24l7.19-.61z" opacity="0.5" />
-                      </svg>
-                  {% else %}
-                      <!-- Empty star -->
-                      <svg
-                          class="w-5 h-5 text-gray-300"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          aria-hidden="true"
-                      >
-                          <path d="M10 15.27L16.18 20l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 5.73L3.82 20z" />
-                      </svg>
-                  {% endif %}
-              {% endfor %}
-          {% endwith %}
-      {% endwith %}
+{% comment %} stars.html {% endcomment %}
+{% with full_stars=row.full_stars half_star=row.half_star %}
+  <!-- Full stars -->
+  {% for i in "0,1,2,3,4,5"|make_list %}
+    {% if forloop.counter <= full_stars %}
+      <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.945a1 1 0 00.95.69h4.197c.969 0 1.371 1.24.588 1.81l-3.4 2.47a1 1 0 00-.363 1.118l1.286 3.945c.3.921-.755 1.688-1.538 1.118l-3.4-2.47a1 1 0 00-1.175 0l-3.4 2.47c-.783.57-1.838-.197-1.538-1.118l1.286-3.945a1 1 0 00-.363-1.118l-3.4-2.47c-.783-.57-.381-1.81.588-1.81h4.197a1 1 0 00.95-.69l1.286-3.945z" />
+      </svg>
+    {% endif %}
+  {% endfor %}
+
+  <!-- Half star -->
+  {% if half_star %}
+    <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+      <!-- Add half-star SVG path here -->
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.945a1 1 0 00.95.69h4.197c.969 0 1.371 1.24.588 1.81l-3.4 2.47a1 1 0 00-.363 1.118l1.286 3.945c.3.921-.755 1.688-1.538 1.118l-3.4-2.47a1 1 0 00-1.175 0l-3.4 2.47c-.783.57-1.838-.197-1.538-1.118l1.286-3.945a1 1 0 00-.363-1.118l-3.4-2.47c-.783-.57-.381-1.81.588-1.81h4.197a1 1 0 00.95-.69l1.286-3.945z" />
+    </svg>
   {% endif %}
-</div>
+{% endwith %}

@@ -12,8 +12,10 @@ def restaurant_details(request, pk):
     reviews = restaurant.reviews.all()  # Using the related_name 'reviews' from the ForeignKey
     return render(request, 'restaurant_details.html', {'restaurant': restaurant, 'reviews': reviews})
 
+
 def add_review(request, pk):
     restaurant = get_object_or_404(FoodEntry, pk=pk)
+
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -26,7 +28,7 @@ def add_review(request, pk):
             average_rating = restaurant.reviews.aggregate(Avg('rating'))['rating__avg']
 
             # Update the restaurant's reviews_rating field
-            restaurant.reviews_rating = average_rating if average_rating is not None else 0.0
+            restaurant.avg_rating = average_rating if average_rating is not None else 0.0
             restaurant.number_of_reviews = restaurant.reviews.count()  # Update the number of reviews
             restaurant.save()
 
@@ -36,6 +38,7 @@ def add_review(request, pk):
                 'rating': review.rating,
                 'comment': review.comment,
                 'user': review.user.username,  # Include the username of the user
+                'average_rating': average_rating  # Include the new average rating
             })
         else:
             # Return a JSON response with errors

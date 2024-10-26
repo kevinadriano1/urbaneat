@@ -26,9 +26,15 @@ def show_main(request):
     else:
         
         unique_food_entries = FoodEntry.objects.all()
+
+    
         
          
     is_manager = request.user.groups.filter(name='Restaurant_Manager').exists()
+    
+    for row in unique_food_entries:
+        row.full_stars = int(row.avg_rating )  # Calculate full stars as an integer
+        row.half_star = row.avg_rating % 1 >= 0.5  # Determine if there's a half star
 
     
     context = {
@@ -39,7 +45,9 @@ def show_main(request):
         'star_range': range(5),
         'last_login': request.COOKIES.get('last_login', 'Not set'),
         'is_manager': is_manager, 
+        'rows': unique_food_entries,
     }
+    
 
     return render(request, "main.html", context)
 
