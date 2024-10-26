@@ -21,12 +21,6 @@
                 <strong>Name:</strong> {{ user.profile.name }}
             </div>
             <div class="bg-gray-100 rounded-lg p-4">
-                <strong>Class:</strong> {{ user.profile.class1 }}
-            </div>
-            <div class="bg-gray-100 rounded-lg p-4">
-                <strong>NPM:</strong> {{ user.profile.npm }}
-            </div>
-            <div class="bg-gray-100 rounded-lg p-4">
                 <strong>Date of Birth:</strong> {{ user.profile.birth_date }}
             </div>
             <div class="bg-gray-100 rounded-lg p-4">
@@ -41,6 +35,11 @@
         <div class="text-center mt-6">
             <a href="{% url 'edit_profile' %}">
                 <button type="button" class="btn btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg">Edit Profile</button>
+            </a>
+        </div>
+        <div class="text-center mt-6">
+            <a href="{% url 'change_username_password' %}">
+                <button type="button" class="btn btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg">Change username</button>
             </a>
         </div>
     </div>

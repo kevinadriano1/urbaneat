@@ -1,6 +1,8 @@
+# user_role/models.py
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.core.validators import RegexValidator
 
 class Profile(models.Model):
@@ -16,8 +18,10 @@ class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='profilepics/', blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
-    class1 = models.CharField(max_length=100, blank=True, null=True)
-    npm = models.CharField(max_length = 100, blank=True, null=True)
+    
+    # Additional fields for tracking username and password changes
+    last_username_change = models.DateTimeField(blank=True, null=True)
+    last_password_change = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
