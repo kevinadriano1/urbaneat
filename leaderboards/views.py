@@ -9,7 +9,7 @@ from collections import defaultdict
 @login_required
 def leaderboard_view(request):
     # Fetch FoodEntry instances where reviews_rating is not null
-    restaurants = FoodEntry.objects.exclude(reviews_rating__isnull=True).order_by('-reviews_rating')
+    restaurants = FoodEntry.objects.exclude(avg_rating__isnull=True).order_by('-avg_rating')
 
     # Group restaurants by food_type using defaultdict
     leaderboard = defaultdict(list)
