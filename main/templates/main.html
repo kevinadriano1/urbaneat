@@ -6,6 +6,8 @@
 {% endblock meta %}
 {% block content %}
 {% include 'navbar.html' %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+
 <div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-50 flex flex-col">
 
   <div class="p-2 mb-6 relative flex justify-center">
@@ -57,6 +59,18 @@
   </a>
 
 </div>
+
+  <!-- Modal for Delete Confirmation -->
+  <div id="delete-modal" class="hidden fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-8 max-w-lg mx-auto">
+      <h2 class="text-xl font-bold text-gray-700">Are you sure?</h2>
+      <p class="mt-4">Do you really want to delete this restaurant? This process cannot be undone.</p>
+      <div class="mt-6 flex justify-end space-x-4">
+        <button id="close-modal" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+        <button id="confirm-delete" class="bg-red-600 text-white px-4 py-2 rounded">Delete</button>
+      </div>
+    </div>
+  </div>
 {% include 'footer.html' %}
 
 <!-- CSS Styling for Typing Effect -->
@@ -107,6 +121,48 @@
 
         typeEffect();
     });
+</script>
+<!--Deletion Modal code-->
+<script>
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  let deleteRestaurantId = null;
+
+  // Function to open the delete modal
+  function openDeleteModal(id) {
+      deleteRestaurantId = id;
+      document.getElementById('delete-modal').classList.remove('hidden');
+  }
+
+  // Function to close the delete modal
+  document.getElementById('close-modal').addEventListener('click', function () {
+      document.getElementById('delete-modal').classList.add('hidden');
+  });
+
+  // Handle delete confirmation button click
+  document.getElementById('confirm-delete').addEventListener('click', function () {
+      if (deleteRestaurantId !== null) {
+          // Perform the deletion process using POST method for AJAX request
+          fetch(`/admin_role/delete_resto_ajax/${deleteRestaurantId}/`, {
+              method: 'POST',  // Use POST for AJAX
+              headers: {
+                  'X-CSRFToken': '{{ csrf_token }}',  // Ensure CSRF token is included
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  'action': 'delete'  // Optional: indicate delete action
+              })
+          })
+          .then(response => {
+              if (response.ok) {
+                  location.reload(); // Reload the page after successful deletion
+              } else {
+                  alert('Error deleting restaurant');
+              }
+          })
+          .catch(error => console.error('Error:', error));
+      }
+  });
 </script>
 
 {% endblock content %}

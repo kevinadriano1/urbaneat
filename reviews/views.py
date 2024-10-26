@@ -37,8 +37,8 @@ def add_review(request, pk):
                 'success': True,
                 'rating': review.rating,
                 'comment': review.comment,
-                'user': review.user.username,  # Include the username of the user
-                'average_rating': average_rating  # Include the new average rating
+                'user': review.user.username, 
+                'average_rating': average_rating  
             })
         else:
             # Return a JSON response with errors

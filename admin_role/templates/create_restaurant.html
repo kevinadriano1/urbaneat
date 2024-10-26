@@ -1,17 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8 flex flex-col items-center">
+{% include 'navbar.html' %}
+
+<!-- Adjust padding to prevent navbar overlap -->
+<div class="container mx-auto px-4 py-8 flex flex-col items-center" style="padding-top: 6rem;"> 
     <h1 class="text-3xl font-semibold mb-6 text-center">Add New Restaurant</h1>
 
-    <form method="POST" class="bg-white shadow-lg rounded-lg p-12 w-full max-w-3xl"> <!-- Increased max width to 3xl -->
+    <form method="POST" class="bg-white shadow-lg rounded-lg p-12 w-full max-w-3xl">
         {% csrf_token %}
         <table class="w-full">
             {{ form.as_table }}
             <tr>
                 <td class="text-center" colspan="2">
-                    <input type="submit" value="Add New Restaurant" 
-                           class="mt-4 px-6 py-2 bg-black hover:bg-gray-800 text-white font-semibold rounded-md transition duration-300" />
+                    <div class="flex justify-between mt-4">
+                        <!-- Cancel Button (On the left corner) -->
+                        <a href="{% url 'main:show_main' %}" 
+                           class="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-md transition duration-300">
+                            Cancel
+                        </a>
+                        <!-- Add New Restaurant Button (On the right corner) -->
+                        <input type="submit" value="Add New Restaurant" 
+                               class="px-6 py-2 bg-black hover:bg-gray-800 text-white font-semibold rounded-md transition duration-300" />
+                    </div>
                 </td>
             </tr>
         </table>
@@ -38,5 +49,6 @@
         width: 100%; /* Full width of the table cell */
     }
 </style>
+{% include 'footer.html' %}
 
 {% endblock %}

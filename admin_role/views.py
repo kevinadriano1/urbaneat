@@ -4,7 +4,7 @@ from main.models import FoodEntry
 from .forms import FoodEntryForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.http import HttpResponseForbidden
+from django.http import JsonResponse
 
 # Custom decorator to check if user is in the Restaurant_Manager group
 def is_restaurant_manager(user):
@@ -53,6 +53,8 @@ def create_restaurant(request):
         if form.is_valid():
             # Save the new food entry to the database
             food_entry = form.save(commit=False)
+            food_entry.reviews_rating = 0.0
+            food_entry.number_of_reviews = 0
             food_entry.user = request.user  # Associate the current user with the entry
             food_entry.save()
             # Redirect to the main view or another relevant page after creation
@@ -68,13 +70,15 @@ def create_restaurant(request):
     return render(request, 'create_restaurant.html', context)
 
 @login_required(login_url='/auth/login/')
-def delete_restaurant(request, id):
-    if not is_restaurant_manager(request.user):
-        return render(request, 'unauthorized.html')  # Redirect to unauthorized page
+def delete_restaurant_via_ajax(request, id):
+    if request.method == 'POST':
+        if not is_restaurant_manager(request.user):
+            return JsonResponse({'success': False, 'message': 'Unauthorized'}, status=403)
+        
+        food_entry = get_object_or_404(FoodEntry, id=id)
+        food_entry.delete()
 
-    # Get food entry based on id or return a 404 error if not found
-    food_entry = get_object_or_404(FoodEntry, pk=id)
-    # Delete the food entry
-    food_entry.delete()
-    # Return to the home page
-    return HttpResponseRedirect(reverse('main:show_main'))
+        return JsonResponse({'success': True})
+    
+    return JsonResponse({'success': False, 'message': 'Invalid request'}, status=400)
+

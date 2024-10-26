@@ -9,12 +9,13 @@ class FoodEntryForm(ModelForm):
             "street_address",
             "location",
             "food_type",
-            "reviews_rating",
-            "number_of_reviews",
             "comments",
             "contact_number",
-            "trip_advisor_url",
+            "trip_advisor_url", 
             "menu_info", 
             "image_url"
-        ]  # Use the correct fields from the model
-
+        ]
+        labels = {
+            'trip_advisor_url': 'Restaurant URL',  
+            'comments': 'Testimony', 
+        }

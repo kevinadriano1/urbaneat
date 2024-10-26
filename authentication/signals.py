@@ -1,4 +1,4 @@
-# your_app/signals.py
+#This is an added extension of admin_role!
 from django.db.models.signals import post_migrate
 from django.contrib.auth.models import Group
 from django.dispatch import receiver

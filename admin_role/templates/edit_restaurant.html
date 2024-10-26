@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8 flex flex-col items-center">
+{% include 'navbar.html' %}
+
+<!-- Adjust padding to prevent navbar overlap -->
+<div class="container mx-auto px-4 py-8 flex flex-col items-center relative" style="padding-top: 6rem;"> 
+    <!-- Cancel Button in the form of an "X" icon using Tailwind -->
+    <a href="{% url 'main:show_main' %}" class="absolute top-0 right-0 mt-4 mr-4 text-black hover:text-gray-700 text-3xl font-bold">
+        &times; <!-- Using the HTML entity for "X" -->
+    </a>
+    
     <h1 class="text-3xl font-semibold mb-6 text-center">Edit Restaurant</h1>
 
     <form method="POST" class="bg-white shadow-lg rounded-lg p-12 w-full max-w-3xl">
@@ -11,26 +19,20 @@
             <tr>
                 <td class="text-center" colspan="2">
                     <div class="flex justify-between mt-4">
+                        <!-- Cancel Button (On the left corner) -->
+                        <a href="{% url 'main:show_main' %}" 
+                           class="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-md transition duration-300">
+                            Cancel
+                        </a>
+                        <!-- Save Changes Button (On the right corner) -->
                         <input type="submit" value="Save changes" 
                                class="px-6 py-2 bg-black hover:bg-gray-800 text-white font-semibold rounded-md transition duration-300" />
-                        <button type="button" onclick="confirmDelete()" 
-                                class="px-6 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md transition duration-300">
-                            Delete Restaurant
-                        </button>
                     </div>
                 </td>
             </tr>
         </table>
     </form>
 </div>
-
-<script>
-    function confirmDelete() {
-        if (confirm("Are you sure you want to delete this restaurant?")) {
-            window.location.href = "{% url 'admin_role:delete_restaurant' food_entry.id %}";  
-        }
-    }
-</script>
 
 <style>
     table {
@@ -52,5 +54,6 @@
         width: 100%; /* Full width of the table cell */
     }
 </style>
+{% include 'footer.html' %}
 
 {% endblock %}
