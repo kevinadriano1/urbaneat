@@ -42,6 +42,14 @@
                 <button type="button" class="btn btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg shadow-lg">Change username</button>
             </a>
         </div>
+
+        <!-- Logout Button and Last Login -->
+        <div class="text-center mt-6">
+            <a href="{% url 'auth:logout' %}">
+                <button type="button" class="btn btn-danger bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg shadow-lg">Logout</button>
+            </a>
+            <h5 class="mt-4 text-gray-500">Last login session: {{ last_login }}</h5>
+        </div>
     </div>
 </div>
 {% endblock %}
