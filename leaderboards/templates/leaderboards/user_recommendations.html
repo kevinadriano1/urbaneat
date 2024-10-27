@@ -1,28 +1,40 @@
 <!-- leaderboards/templates/leaderboards/user_recommendations.html -->
 
-{% if recommended_restaurants %}
-  <div class="recommendations">
-    {% for recommendation in recommended_restaurants %}
-      <div class="card">
-        <h3>{{ recommendation.restaurant.name }}</h3>
-        <p>Rating: 
-          {% if recommendation.user_review %}
-            {% for i in "12345" %}
-              {% if forloop.counter <= recommendation.user_review.rating %}
-                ★
-              {% else %}
-                ☆
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            No rating
-          {% endif %}
+{% if recommended_reviews %}
+  <div class="recommendations grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for review in recommended_reviews %}
+      <div class="card bg-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-4">
+        <!-- Restaurant Information -->
+        <h3 class="text-lg font-medium text-gray-800">
+          <a href="{% url 'review:restaurant_details' review.restaurant.id %}" class="hover:text-gray-600">
+            {{ review.restaurant.name }}
+          </a>
+        </h3>
+        
+        <!-- User's Review Rating -->
+        <p class="text-yellow-400">
+          {% for i in "12345" %}
+            {% if forloop.counter <= review.rating %}
+              ★
+            {% else %}
+              ☆
+            {% endif %}
+          {% endfor %}
         </p>
-        <p>{{ recommendation.restaurant.location }}</p>
-        <a href="{% url 'review:restaurant_details' recommendation.restaurant.id %}">View Details</a>
+        
+        <!-- Restaurant Location -->
+        <p class="text-gray-600">{{ review.restaurant.location }}</p>
+        
+        <!-- User's Comment (Optional) -->
+        {% if review.comment %}
+          <p class="text-gray-700">{{ review.comment }}</p>
+        {% endif %}
+        
+        <!-- View Details Link -->
+        <a href="{% url 'review:restaurant_details' review.restaurant.id %}" class="text-blue-500 hover:underline">View Details</a>
       </div>
     {% endfor %}
   </div>
 {% else %}
-  <p>You have not recommended any restaurants yet.</p>
+  <p class="text-gray-600">You have not recommended any restaurants yet.</p>
 {% endif %}

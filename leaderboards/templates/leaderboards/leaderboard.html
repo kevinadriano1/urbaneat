@@ -1,3 +1,4 @@
+<!-- leaderboards/templates/leaderboards/leaderboard.html -->
 {% extends "base.html" %}
 
 {% block content %}
@@ -7,6 +8,7 @@
   
   <!-- Tabs Navigation -->
   <nav class="flex justify-center mb-10 space-x-6" role="tablist">
+    <!-- Leaderboard Tab -->
     <button 
       class="tab-button relative px-6 py-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition transform hover:scale-105 flex items-center space-x-2"
       onclick="openTab(event, 'Leaderboard')" 
@@ -14,17 +16,21 @@
       aria-selected="true" 
       role="tab"
     >
+      <!-- SVG Icon -->
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v2H3V3zm0 6h18v2H3V9zm0 6h18v2H3v-2z" />
       </svg>
       <span>Leaderboard</span>
     </button>
+    
+    <!-- Recommendations Tab -->
     <button 
       class="tab-button relative px-6 py-3 bg-gray-200 text-gray-800 rounded-full shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 transition transform hover:scale-105 flex items-center space-x-2"
       onclick="openTab(event, 'Recommendations')" 
       aria-selected="false" 
       role="tab"
     >
+      <!-- SVG Icon -->
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6a2 2 0 114 0v6m6 0v-2a4 4 0 00-8 0v2m8 0H5" />
       </svg>
@@ -46,6 +52,7 @@
                 <li class="bg-gray-100 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-4 flex items-center justify-between">
                   <!-- Restaurant Information -->
                   <div class="flex items-center space-x-4">
+                    <!-- SVG Icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 4a8 8 0 100 16 8 8 0 000-16z" />
                     </svg>
@@ -55,6 +62,7 @@
                   </div>
                   <!-- Review Rating -->
                   <div class="flex items-center space-x-2">
+                    <!-- Star Rating SVG -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.177c.969 0 1.371 1.24.588 1.81l-3.386 2.46a1 1 0 00-.364 1.118l1.286 3.974c.3.921-.755 1.688-1.54 1.118l-3.386-2.46a1 1 0 00-1.176 0l-3.386 2.46c-.784.57-1.838-.197-1.54-1.118l1.286-3.974a1 1 0 00-.364-1.118L2.64 9.4c-.783-.57-.38-1.81.588-1.81h4.177a1 1 0 00.95-.69l1.286-3.974z" />
                     </svg>
@@ -85,6 +93,7 @@
         {% endfor %}
       {% else %}
         <div class="flex flex-col items-center justify-center h-64 space-y-4">
+          <!-- No Data SVG -->
           <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>

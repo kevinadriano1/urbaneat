@@ -8,8 +8,8 @@ from collections import defaultdict
 
 @login_required
 def leaderboard_view(request):
-    # Fetch FoodEntry instances where reviews_rating is not null
-    restaurants = FoodEntry.objects.exclude(avg_rating__isnull=True).order_by('-avg_rating')
+    # Fetch FoodEntry instances with avg_rating greater than 0.0
+    restaurants = FoodEntry.objects.filter(avg_rating__gt=0.0).order_by('-avg_rating')
 
     # Group restaurants by food_type using defaultdict
     leaderboard = defaultdict(list)
@@ -17,25 +17,19 @@ def leaderboard_view(request):
         food_type = restaurant.food_type
         leaderboard[food_type].append(restaurant)
 
-    # Fetch user recommendations
+    # Fetch user high-rated reviews (rating >= 4)
     user = request.user
     high_rated_reviews = Review.objects.filter(user=user, rating__gte=4).select_related('restaurant')
-    recommended_restaurants = set(review.restaurant for review in high_rated_reviews)
 
-    recommendations = []
-    for restaurant in recommended_restaurants:
-        user_review = restaurant.reviews.filter(user=user).first()
-        recommendations.append({
-            'restaurant': restaurant,
-            'user_review': user_review
-        })
+    # Prepare recommendations as a list of high-rated reviews
+    recommendations = high_rated_reviews
 
     # Debugging: Print recommendations
     print(f'Recommendations: {recommendations}')
 
     context = {
         'leaderboard': dict(leaderboard),
-        'recommended_restaurants': recommendations,
+        'recommended_reviews': recommendations,  # Updated context variable
     }
     return render(request, 'leaderboards/leaderboard.html', context)
 
