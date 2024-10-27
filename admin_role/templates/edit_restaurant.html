@@ -3,17 +3,20 @@
 {% block content %}
 {% include 'navbar.html' %}
 
-<!-- Adjust padding to prevent navbar overlap -->
+<!-- Full-Screen Background Image Container -->
+<div class="fixed inset-0 bg-cover bg-center transform scale-110" style="background-image: url('{{ food_entry.image_url }}'); filter: blur(10px); z-index: -10;"></div>
+
+<!-- Main Content Area with Padding to Prevent Navbar Overlap -->
 <div class="container mx-auto px-4 py-8 flex flex-col items-center relative" style="padding-top: 6rem;"> 
+
     <!-- Cancel Button in the form of an "X" icon using Tailwind -->
     <a href="{% url 'main:show_main' %}" class="absolute top-0 right-0 mt-4 mr-4 text-black hover:text-gray-700 text-3xl font-bold">
         &times; <!-- Using the HTML entity for "X" -->
     </a>
-    
-    <h1 class="text-3xl font-semibold mb-6 text-center">Edit Restaurant</h1>
 
-    <form method="POST" class="bg-white shadow-lg rounded-lg p-12 w-full max-w-3xl">
+    <form method="POST" class="bg-white shadow-lg rounded-lg p-12 w-full max-w-3xl relative">
         {% csrf_token %}
+        <h1 class="text-3xl font-bold mb-6 text-center">Edit {{ food_entry.name }}</h1>
         <table class="w-full">
             {{ form.as_table }}
             <tr>
@@ -53,7 +56,7 @@
         border-radius: 4px; /* Rounded corners for input fields */
         width: 100%; /* Full width of the table cell */
     }
+    
 </style>
 {% include 'footer.html' %}
-
 {% endblock %}

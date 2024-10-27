@@ -1,10 +1,13 @@
 {% load static %}
 
-<header id="main-header" class="bg-gray-800 text-white fixed w-full top-0 z-50 transition-all duration-300">
+<header id="main-header" class="bg-white text-black fixed w-full top-0 z-50 transition-all duration-300 shadow-md">
   <div class="container mx-auto px-4">
       <div class="flex items-center justify-between py-4">
           <div class="flex items-center">
-            <img src="{% static 'image/white_logo.png' %}" alt="UrbanEat Text" class="w-28 mb-2" />
+              <!-- Wrap the image inside a link to the home page -->
+              <a href="{% url 'main:show_main' %}">
+                  <img src="{% static 'image/black_logo.png' %}" alt="UrbanEat Text" class="w-28 mb-2" />
+              </a>
           </div>
           <button id="menu-toggle" class="md:hidden focus:outline-none z-50">
               <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -16,37 +19,47 @@
           </button>
           <nav id="main-nav" class="fixed inset-y-0 right-0 transform translate-x-full md:relative md:translate-x-0 bg-gray-800 md:bg-transparent w-64 md:w-auto h-full md:h-auto overflow-y-auto md:overflow-visible transition-transform duration-300 ease-in-out md:transition-none">
               <ul class="pt-16 md:pt-0 px-4 md:px-0 md:flex space-y-2 md:space-y-0 md:space-x-4">
-                  <!-- Home Link -->
-                  <li class="flex items-center">
-                      <a href="{% url 'main:show_main' %}" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200 {% if request.resolver_match.url_name == 'show_main' %}text-gray-300{% endif %}">Home</a>
-                  </li>
+                <!-- Home Link -->
+                <li class="flex items-center">
+                    <a href="{% url 'main:show_main' %}" class="block py-2 md:py-0 hover:text-cyan-800 transition duration-200"><strong>Home</strong></a>
+                </li>
+
+                 <!-- Vertical Divider (Pipe) hidden on mobile -->
+                 <li class="hidden md:flex items-center justify-center">
+                    <span class="text-cyan-900">|</span>  <!-- Pipe aligned with flexbox -->
+                </li>
+                
+                <!-- Leaderboards Link (Visible to Authenticated Users Only) -->
+                {% if user.is_authenticated %}
+                    <li class="flex items-center">
+                        <a href="{% url 'leaderboards:leaderboard' %}" class="block py-2 md:py-0 hover:text-cyan-800 transition duration-200"><strong>Leaderboards</strong></a>
+                    </li>
+                {% endif %}
+
+               <!-- Vertical Divider (Pipe) hidden on mobile -->
+               <li class="hidden md:flex items-center justify-center">
+                <span class="text-cyan-900">|</span>  <!-- Pipe aligned with flexbox -->
+               </li>
                   
-                  <!-- Leaderboards Link (Visible to Authenticated Users Only) -->
-                  {% if user.is_authenticated %}
-                      <li class="flex items-center">
-                          <a href="{% url 'leaderboards:leaderboard' %}" class="block py-2 md:py-0 hover:text-gray-300 transition duration-200 {% if request.resolver_match.url_name == 'leaderboard' %}text-gray-300{% endif %}">Leaderboards</a>
-                      </li>
-                  {% endif %}
+                <!-- Welcome Message with Bold Username -->
+                <li class="flex items-center">
+                    <p class="block py-2 md:py-0 transition duration-200">Welcome, <strong class="text-cyan-800">{{ user.username }}</strong>!</p>
+                </li>
                   
-                  <!-- Welcome Message -->
-                  <li class="flex items-center">
-                      <p class="block py-2 md:py-0 hover:text-gray-300 transition duration-200">Welcome, {{ user.username }}!</p>
-                  </li>
-                  
-                  <!-- Profile Picture Link -->
-                  <li class="flex items-center">
-                      <a href="{% url 'profile' %}">
-                          {% if user.is_authenticated %}
-                              {% if user.profile.profile_picture %}
-                                  <!-- Show User's Profile Picture -->
-                                  <img src="{{ user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full object-cover" alt="Profile Picture">
-                              {% else %}
-                                  <!-- Default Placeholder if no profile picture -->
-                                  <img src="{% static 'image/default-profile.jpg' %}" class="w-10 h-10 rounded-full object-cover" alt="Default Profile Picture">
-                              {% endif %}
-                          {% endif %}
-                      </a>
-                  </li>
+                <!-- Profile Picture Link -->
+                <li class="flex items-center">
+                    <a href="{% url 'profile' %}">
+                        {% if user.is_authenticated %}
+                            {% if user.profile.profile_picture %}
+                                <!-- Show User's Profile Picture -->
+                                <img src="{{ user.profile.profile_picture.url }}" class="w-10 h-10 rounded-full object-cover" alt="Profile Picture">
+                            {% else %}
+                                <!-- Default Placeholder if no profile picture -->
+                                <img src="{% static 'image/default-profile.jpg' %}" class="w-10 h-10 rounded-full object-cover" alt="Default Profile Picture">
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </li>
               </ul>
           </nav>
       </div>

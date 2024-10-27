@@ -9,7 +9,6 @@
 <meta name="csrf-token" content="{{ csrf_token }}">
 
 <div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-50 flex flex-col">
-
   <div class="p-2 mb-6 relative flex justify-center">
     <div class="w-full max-w-lg relative flex items-center space-x-4">
       <!-- Search Form -->
@@ -31,11 +30,11 @@
   
       <!-- Add Restaurant Button -->
       {% if request.user.is_authenticated and is_manager %}
-      <a href="{% url 'admin_role:create_restaurant' %}">
-        <button type="button" class="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-3 rounded-full transition duration-200">
-          Add Restaurant
-        </button>
-      </a>
+        <a href="{% url 'admin_role:create_restaurant' %}">
+          <button type="button" class="bg-cyan-600 hover:bg-cyan-700 text-white w-12 h-12 rounded-full flex items-center justify-center">
+            <p class="text-3xl pb-2 transition duration-200 transform hover:rotate-45">+</p> <!-- Adjust the text size as needed -->
+          </button>
+        </a>
       {% endif %}
     </div>
   </div>

@@ -8,14 +8,12 @@
     <title>Register Account</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="min-h-screen bg-gradient-to-r from-black-800 to-gray-900 flex items-center justify-center p-4">
-    <div class="flex flex-col md:flex-row w-full max-w-5xl bg-white shadow-2xl rounded-3xl overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-3xl">
+<body class="min-h-screen bg-gradient-to-r from-black-800 to-gray-900 flex items-center justify-center">
+    <div class="flex flex-col md:flex-row w-full bg-white shadow-2xl overflow-hidden">
         <!-- Left Side (Register Form) -->
-        <div class="md:w-1/2 p-10 bg-white flex flex-col justify-center">
-            <div class="flex justify-center mb-6">
-                <img src="{% static 'image/black_logo.png' %}" class="w-40" alt="UrbanEat Logo" />
-            </div>
-            <h1 class="text-3xl font-semibold text-gray-800 mb-8 text-center">Create Your Account</h1>
+        <div class="md:w-1/3 p-14 bg-white flex flex-col justify-center">
+
+            <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Create Your Account</h1>
             <div class="w-full max-w-md mx-auto">
                 <form method="POST" action="" class="space-y-6">
                     {% csrf_token %}
@@ -27,7 +25,7 @@
                             <!-- Special handling for the group_choice field (radio buttons) -->
                             {% if field.name == "group_choice" %}
                                 <!-- Change label to 'Who are you?' -->
-                                <label class="block text-gray-700 font-medium mb-2 transition-colors duration-300 hover:text-blue-500" for="{{ field.id_for_label }}">
+                                <label class="block text-gray-700 font-medium mb-2 transition-colors duration-300 hover:text-cyan-500" for="{{ field.id_for_label }}">
                                     Permissions
                                 </label>
                                 <div class="space-y-2">
@@ -48,48 +46,40 @@
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                <label class="block text-gray-700 font-medium mb-2 transition-colors duration-300 hover:text-blue-500" for="{{ field.id_for_label }}">
+                                <label class="block text-gray-700 font-medium mb-2" for="{{ field.id_for_label }}">
                                     {{ field.label }}
                                 </label>
-                                {{ field|add_class:"w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 hover:border-blue-400" }}
+                                {{ field|add_class:"w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-colors duration-300 hover:border-cyan-400" }}
                             {% endif %}
                         </div>
                     {% endfor %}
 
-                    <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors duration-300 focus:outline-none shadow-lg" type="submit">
+                    <button class="w-full bg-gray-800 text-white py-3 rounded-lg hover:bg-gray-900 transition-colors duration-300 focus:outline-none shadow-lg" type="submit">
                         Register
                     </button>
                 </form>
 
                 {% if messages %}
-                    <ul class="mt-4 text-red-600">
+                    <ul class="mt-4 text-gray-500">
                         {% for message in messages %}
                             <li>{{ message }}</li>
                         {% endfor %}
                     </ul>
                 {% endif %}
                 <div class="mt-4 text-sm text-gray-600 text-center">
-                    Already have an account? <a href="{% url 'auth:login' %}" class="text-blue-500 hover:underline transition-all duration-300">Log In</a>
+                    Already have an account? <a href="{% url 'auth:login' %}" class="text-cyan-500 hover:underline transition-all duration-300">Log In</a>
                 </div>
             </div>
         </div>
 
         <!-- Right Side (Image with Welcome Text and Logo) -->
-        <div class="md:w-1/2 h-64 md:h-auto relative">
+        <div class="md:w-2/3 h-64 md:h-auto relative">
             <!-- Background Image -->
-            <img src="https://images.unsplash.com/photo-1526361547623-9dd08c979bb1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105" alt="Restaurant Background" />
-            
+            {% include 'slideshow.html' %}            
             <!-- Overlay -->
-            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-start items-start p-8">
+            <div class="absolute inset-0flex flex-col justify-start items-start p-8">
                 <!-- Logo at the top -->
                 <img src="{% static 'image/white_logo.png' %}" alt="UrbanEat Text" class="w-28 mb-2" />
-            
-                <!-- Spacer to push content to the bottom -->
-                <div class="flex-grow"></div>
-            
-                <!-- Text content at the bottom -->
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-2">Welcome!</h2>
-                <p class="text-lg md:text-xl text-gray-200">Let's find you some good eats.</p>
             </div>
             
         </div>

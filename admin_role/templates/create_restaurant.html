@@ -2,24 +2,27 @@
 
 {% block content %}
 {% include 'navbar.html' %}
+<div id="background-image" class="fixed inset-0 bg-cover bg-center transform scale-110" 
+     style="background-image: url('https://st3.depositphotos.com/3930503/13741/i/450/depositphotos_137418818-stock-photo-light-blue-gradient-background-blue.jpg'); 
+     z-index: -10; filter: blur(10px);"></div>
+<div class="fixed inset-0 bg-white opacity-80" style="z-index: -9;"></div> <!-- Adjust opacity as needed -->
 
-<!-- Adjust padding to prevent navbar overlap -->
 <div class="container mx-auto px-4 py-8 flex flex-col items-center" style="padding-top: 6rem;"> 
-    <h1 class="text-3xl font-semibold mb-6 text-center">Add New Restaurant</h1>
 
     <form method="POST" class="bg-white shadow-lg rounded-lg p-12 w-full max-w-3xl">
         {% csrf_token %}
+        <h1 class="text-3xl font-bold mb-6 text-center">Add Restaurant</h1>
         <table class="w-full">
             {{ form.as_table }}
             <tr>
                 <td class="text-center" colspan="2">
                     <div class="flex justify-between mt-4">
-                        <!-- Cancel Button (On the left corner) -->
+                        <!-- Cancel Button -->
                         <a href="{% url 'main:show_main' %}" 
                            class="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-md transition duration-300">
                             Cancel
                         </a>
-                        <!-- Add New Restaurant Button (On the right corner) -->
+                        <!-- Add New Restaurant Button -->
                         <input type="submit" value="Add New Restaurant" 
                                class="px-6 py-2 bg-black hover:bg-gray-800 text-white font-semibold rounded-md transition duration-300" />
                     </div>
@@ -35,18 +38,18 @@
         width: 100%;
     }
     th, td {
-        padding: 20px; /* Increased padding for wider cells */
-        text-align: left; /* Align text left within table cells */
+        padding: 20px; 
+        text-align: left; 
     }
     input[type="text"], 
     input[type="email"], 
     input[type="url"], 
     input[type="number"], 
     textarea {
-        border: 1px solid #ccc; /* Light gray border for input fields */
-        padding: 12px; /* Increased padding for input fields */
-        border-radius: 4px; /* Rounded corners for input fields */
-        width: 100%; /* Full width of the table cell */
+        border: 1px solid #ccc; 
+        padding: 12px; 
+        border-radius: 4px; 
+        width: 100%; 
     }
 </style>
 {% include 'footer.html' %}
