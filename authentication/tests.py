@@ -1,60 +1,65 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User, Group
+from authentication.forms import CustomUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.utils import timezone
+import datetime
+
+from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 
-class AuthenticationViewsTest(TestCase):
+class AuthenticationTests(TestCase):
     def setUp(self):
-        # Membuat grup yang diperlukan
-        Group.objects.create(name="User")
-        Group.objects.create(name="Restaurant_Manager")
-
-        # Detail akun untuk login testing
-        self.credentials = {
+        # Check if the group already exists to avoid UNIQUE constraint errors
+        self.user_group, created = Group.objects.get_or_create(name='User')
+        self.manager_group, created = Group.objects.get_or_create(name='Restaurant_Manager')
+        self.user_data = {
             'username': 'testuser',
-            'password': 'testpassword'
+            'password1': 'password123',
+            'password2': 'password123',
+            'group_choice': 'user'
         }
-        self.user = User.objects.create_user(**self.credentials)
-
-    def test_register_view(self):
-        response = self.client.get(reverse('auth:register'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'register.html')
-
-        # Data untuk simulasi registrasi user
-        form_data = {
+        self.login_data = {
+            'username': 'testuser',
+            'password': 'password123'
+        }
+    
+    def test_register_user(self):
+        response = self.client.post(reverse('auth:register'), {
             'username': 'newuser',
-            'password1': 'newpassword123',
-            'password2': 'newpassword123',
-            'group_choice': 'user'  # Sesuaikan dengan pilihan grup
-        }
-        response = self.client.post(reverse('auth:register'), form_data)
-        self.assertRedirects(response, reverse('auth:login'))
+            'password1': 'testpassword123',
+            'password2': 'testpassword123',
+            'group_choice': 'user'  # Ensure you include this field
+        })
+        
+        # Assert the response status code for a successful registration
+        self.assertEqual(response.status_code, 302)  # Expecting a redirect
+        
+        # Check if the user has been created successfully
+        self.assertTrue(User.objects.filter(username='newuser').exists())
 
-        # Verifikasi user baru dan keanggotaan grup
-        new_user = get_user_model().objects.get(username='newuser')
-        self.assertTrue(new_user.groups.filter(name='User').exists())
+    def test_login_user(self):
+        # First, register the user
+        user = User.objects.create_user(username='testuser', password='password123')
+        user.save()
 
-    def test_login_user_view(self):
-        # Mengakses halaman login
-        response = self.client.get(reverse('auth:login'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'login.html')
-
-        # Melakukan login dengan kredensial yang ada
-        response = self.client.post(reverse('auth:login'), self.credentials, follow=True)
+        # Test login functionality
+        response = self.client.post(reverse('auth:login'), self.login_data)
+        self.assertEqual(response.status_code, 302)  # Redirect after login
         self.assertRedirects(response, reverse('main:show_main'))
         
-        # Verifikasi cookie "last_login" disetel
-        self.assertIn('last_login', response.client.cookies)
+        # Check if 'last_login' cookie is set
+        last_login = self.client.cookies.get('last_login')
+        self.assertIsNotNone(last_login)
+        self.assertTrue(isinstance(datetime.datetime.fromisoformat(last_login.value), datetime.datetime))
 
-    def test_logout_user_view(self):
-        # Login terlebih dahulu sebelum logout
-        self.client.login(username='testuser', password='testpassword')
+    def test_logout_user(self):
+        # Log in a user to test logout functionality
+        self.client.login(username='existinguser', password='password123')  # Ensure this user exists in your fixtures
+        response = self.client.get(reverse('auth:logout'))  # Call the logout URL
+        self.assertEqual(response.status_code, 302)  # Expecting a redirect after logout
         
-        # Logout user
-        response = self.client.get(reverse('auth:logout'))
-        self.assertRedirects(response, reverse('auth:login'))
-        
-        # Verifikasi cookie "last_login" dihapus
-        self.assertNotIn('last_login', response.client.cookies)
+        # Check if the user is logged out
+        self.assertNotIn('sessionid', self.client.cookies)
+

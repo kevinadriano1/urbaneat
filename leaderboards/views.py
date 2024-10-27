@@ -25,7 +25,7 @@ def leaderboard_view(request):
     recommendations = high_rated_reviews
 
     # Debugging: Print recommendations
-    print(f'Recommendations: {recommendations}')
+
 
     context = {
         'leaderboard': dict(leaderboard),
