@@ -6,7 +6,7 @@ from main.models import FoodEntry
 from .forms import ReviewForm
 from django.http import JsonResponse
 from django.db.models import Avg
-
+from django.db.models import Sum, Avg
 def restaurant_details(request, pk):
     restaurant = get_object_or_404(FoodEntry, pk=pk)
     reviews = restaurant.reviews.all()  # Using the related_name 'reviews' from the ForeignKey
@@ -24,8 +24,22 @@ def add_review(request, pk):
             review.user = request.user  # Set the user as the current logged-in user
             review.save()
 
-            # Calculate the average rating
-            average_rating = restaurant.reviews.aggregate(Avg('rating'))['rating__avg']
+            if restaurant.reviews_rating not in [None, 0.0]:
+                # Calculate the sum of the existing ratings
+                rating_sum = restaurant.reviews.aggregate(Sum('rating'))['rating__sum']
+                # Get the average of the existing reviews (this is 'None' if no reviews exist)
+                average_rating = restaurant.reviews.aggregate(Avg('rating'))['rating__avg']
+                
+                if average_rating is not None:
+                    # If there are existing reviews, include reviews_rating in the average calculation
+                    # We need to add reviews_rating to the sum and divide by the new "total" count of reviews
+                    average_rating = (rating_sum + restaurant.reviews_rating) / (restaurant.reviews.count() + 1)
+                else:
+                    # If no reviews exist, set the average_rating to reviews_rating
+                    average_rating = restaurant.reviews_rating
+            else:
+                # If reviews_rating is None or 0.0, calculate the average from reviews only
+                average_rating = restaurant.reviews.aggregate(Avg('rating'))['rating__avg']
 
             # Update the restaurant's reviews_rating field
             restaurant.avg_rating = average_rating if average_rating is not None else 0.0

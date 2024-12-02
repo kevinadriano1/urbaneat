@@ -28,7 +28,8 @@ urlpatterns = [
     path('user/', include('user_role.urls')),
     path('admin_role/', include('admin_role.urls')),
     path('leaderboards/', include('leaderboards.urls', namespace='leaderboards')),
-    path('search/', include('search_and_filter.urls')),  
+    path('search/', include('search_and_filter.urls')),
+    
 ]
 
 
