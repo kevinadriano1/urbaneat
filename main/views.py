@@ -57,4 +57,16 @@ def show_json_by_id(request, id):
     data = FoodEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+class MainPageAPIView(APIView):
+    def get(self, request):
+        data = {
+            "title": "Welcome to UrbanEat",
+            "message": "Your go-to app for finding the best restaurants!",
+        }
+        return Response(data)
+
+
 

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'admin_role',
     'search_and_filter',
     'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
