@@ -89,3 +89,76 @@ def edit_review(request, pk):
 
     return render(request, 'edit_review.html', {'form': form, 'restaurant': review.restaurant})
 
+from django.http import JsonResponse
+
+def restaurant_detail_json(request, pk):
+    restaurant = get_object_or_404(FoodEntry, pk=pk)
+    reviews = list(restaurant.reviews.values('id', 'rating', 'comment', 'user__username'))
+    data = {
+        'id': str(restaurant.id),
+        'name': restaurant.name,
+        'street_address': restaurant.street_address,
+        'location': restaurant.location,
+        'food_type': restaurant.food_type,
+        'reviews_rating': restaurant.reviews_rating,
+        'number_of_reviews': restaurant.number_of_reviews,
+        'comments': restaurant.comments,
+        'contact_number': restaurant.contact_number,
+        'trip_advisor_url': restaurant.trip_advisor_url,
+        'menu_info': restaurant.menu_info,
+        'image_url': restaurant.image_url,
+        'reviews': reviews,
+    }
+    return JsonResponse(data)
+
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import json
+
+@csrf_exempt  # Disables CSRF protection for this view (use cautiously in production)
+def add_review_flutter(request, pk):
+    if request.method == 'POST':
+        try:
+            # Parse JSON body
+            data = json.loads(request.body)
+            rating = data.get('rating')
+            comment = data.get('comment')
+
+            if rating is None or comment is None:
+                return JsonResponse({'success': False, 'error': 'Rating and comment are required.'}, status=400)
+
+            # Validate and process the review
+            restaurant = get_object_or_404(FoodEntry, pk=pk)
+            review = Review(
+                restaurant=restaurant,
+                user=request.user if request.user.is_authenticated else None,
+                rating=float(rating),
+                comment=comment,
+            )
+            review.save()
+
+            # Update the restaurant's average rating
+            rating_sum = restaurant.reviews.aggregate(Sum('rating'))['rating__sum'] or 0.0
+            average_rating = restaurant.reviews.aggregate(Avg('rating'))['rating__avg'] or 0.0
+
+            restaurant.avg_rating = average_rating
+            restaurant.number_of_reviews = restaurant.reviews.count()
+            restaurant.save()
+
+            # Return success response
+            return JsonResponse({
+                'success': True,
+                'rating': review.rating,
+                'comment': review.comment,
+                'user': review.user.username if review.user else 'Anonymous',
+                'average_rating': restaurant.avg_rating,
+                'number_of_reviews': restaurant.number_of_reviews,
+            })
+
+        except json.JSONDecodeError:
+            return JsonResponse({'success': False, 'error': 'Invalid JSON data.'}, status=400)
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method. Use POST.'}, status=405)
+

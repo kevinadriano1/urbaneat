@@ -8,3 +8,4 @@ django-widget-tweaks
 Pillow
 coverage
 django-cors-headers
+djangorestframework
