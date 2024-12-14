@@ -76,4 +76,3 @@ dtypes: float64(1), int64(1), object(9)
 http://kevin-adriano-urbaneat.pbp.cs.ui.ac.id/auth/login/
 
 
-Halo Test udah bisa belom 
