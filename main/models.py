@@ -15,7 +15,7 @@ class FoodEntry(models.Model):
     trip_advisor_url = models.URLField(default='N/A')  # For the Trip Advisor URL
     menu_info = models.TextField(default='N/A')  # For menu info
     image_url = models.URLField(max_length = 255, default='N/A') # For image URL
-    avg_rating = models.DecimalField(max_digits=3, decimal_places=1, default=0.0) # For the average rating
+    avg_rating = models.CharField(max_length=10) # For the average rating
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from main.models import FoodEntry
 from .forms import FoodEntryForm
 from django.http import HttpResponseRedirect
@@ -21,19 +21,31 @@ def edit_restaurant_api(request, id):
                 form.save()
                 return JsonResponse({'message': 'Restaurant updated successfully.'}, status=200)
             else:
-                # Return form errors
-                return JsonResponse({'error': 'Invalid data.', 'details': form.errors}, status=400)
+                return JsonResponse({'error': 'Invalid data, form errors.'}, status=400)
 
         except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON.'}, status=400)
+            return JsonResponse({'error': 'JSON decode error or 404.'}, status=400)
         
-    return JsonResponse({'message': 'Invalid request method'}, status=405)
+    elif request.method == 'GET':
+        restaurant_entry = get_object_or_404(FoodEntry, id=id)
+        data = {
+            'name': restaurant_entry.name,
+            'street_address': restaurant_entry.street_address,
+            'location': restaurant_entry.location,
+            'food_type': restaurant_entry.food_type,
+            'comments': restaurant_entry.comments,
+            'contact_number': restaurant_entry.contact_number,
+            'trip_advisor_url': restaurant_entry.trip_advisor_url,
+            'menu_info': restaurant_entry.menu_info,
+            'image_url': restaurant_entry.image_url,
+        }
+        return JsonResponse(data, status=200)
+    
         
 @csrf_exempt
 def create_restaurant_api(request):
     if request.method == 'POST':
         try:
-            # Parse JSON data
             data = json.loads(request.body)
             form = FoodEntryForm(data)
             if form.is_valid():
@@ -70,7 +82,7 @@ def is_restaurant_manager(user):
     if user.groups.filter(name='Restaurant_Manager').exists():
         return True
     else:
-        return False  # User is not in the group
+        return False 
 
 @login_required(login_url='/auth/login/')
 def edit_restaurant(request, id):
@@ -85,7 +97,6 @@ def edit_restaurant(request, id):
         # Bind form data with the existing food entry object
         form = FoodEntryForm(request.POST, instance=food_entry)
         if form.is_valid():
-            # Save the changes to the database
             form.save()
             return HttpResponseRedirect(reverse('main:show_main'))
     else:
@@ -104,9 +115,7 @@ def create_restaurant(request):
     if not is_restaurant_manager(request.user):
         return render(request, 'unauthorized.html')  # Redirect to unauthorized page
 
-    # Handle form submission
     if request.method == 'POST':
-        # Create a new form instance with the submitted data
         form = FoodEntryForm(request.POST)
         if form.is_valid():
             # Save the new food entry to the database
@@ -114,15 +123,13 @@ def create_restaurant(request):
             food_entry.reviews_rating = 0.0
             food_entry.number_of_reviews = 0
             food_entry.avg_rating = "0.0"
-            food_entry.user = request.user  # Associate the current user with the entry
             food_entry.save()
-            # Redirect to the main view or another relevant page after creation
+            # Redirect to the main view 
             return HttpResponseRedirect(reverse('main:show_main'))
     else:
         # If it's a GET request, display an empty form
         form = FoodEntryForm()
     
-    # Render the create restaurant form template with the form instance
     context = {
         'form': form,
     }
