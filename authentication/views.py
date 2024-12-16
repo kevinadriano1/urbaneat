@@ -75,12 +75,23 @@ def login_flutter(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
+    
     if user is not None:
         if user.is_active:
             auth_login(request, user)
-            # Successful login status.
+            
+            # Get the group(s) the user belongs to
+            groups = user.groups.all()
+            if groups.exists():
+                # Assuming a user can only belong to one group, you can pick the first one or handle it as needed
+                user_role = groups.first().name  # If multiple groups, you may concatenate them or choose one
+            else:
+                user_role = 'No role assigned'
+                
+            # Successful login status with user role (group name)
             return JsonResponse({
                 "username": user.username,
+                "user_role": user_role,
                 "status": True,
                 "message": "Login successful!"
             }, status=200)
@@ -89,13 +100,13 @@ def login_flutter(request):
                 "status": False,
                 "message": "Login failed, account disabled."
             }, status=401)
-
     else:
         return JsonResponse({
             "status": False,
             "message": "Login failed, check email or password again."
         }, status=401)
-    
+
+
 @csrf_exempt
 def register_flutter(request):
     print("halo")
@@ -104,6 +115,7 @@ def register_flutter(request):
         username = data['username']
         password1 = data['password1']
         password2 = data['password2']
+        group_choice = data.get('group_choice', 'user')  # Default to 'user' if not provided
 
         # Check if the passwords match
         if password1 != password2:
@@ -121,6 +133,26 @@ def register_flutter(request):
 
         # Create the new user
         user = User.objects.create_user(username=username, password=password1)
+        
+        # Add user to the appropriate group
+        try:
+            if group_choice == 'user':
+                group = Group.objects.get(name='User')
+            elif group_choice == 'manager':
+                group = Group.objects.get(name='Restaurant_Manager')
+            else:
+                return JsonResponse({
+                    "status": False,
+                    "message": "Invalid group choice."
+                }, status=400)
+            
+            user.groups.add(group)
+        except Group.DoesNotExist:
+            return JsonResponse({
+                "status": False,
+                "message": "Group does not exist."
+            }, status=400)
+
         user.save()
 
         return JsonResponse({
