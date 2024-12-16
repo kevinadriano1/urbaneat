@@ -25,13 +25,14 @@ SECRET_KEY = 'django-insecure-g*&jn%iz!+imy+fur9!02l#c**zrpp%z@we)(nz%df40$icg9!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION = os.getenv("PRODUCTION", False)
-DEBUG = not PRODUCTION #kev ini di set ke true abis itu rilis ke pws lgi klo masi masalah csrf supaya keliatan salahnya dmn
+DEBUG = True #kev ini di set ke true abis itu rilis ke pws lgi klo masi masalah csrf supaya keliatan salahnya dmn
 
 ALLOWED_HOSTS = [
     "localhost", 
     "127.0.0.1",
     "kevin-adriano-urbaneat.pbp.cs.ui.ac.id",
     "10.0.2.2", 
+    "kevin-adriano-urbaneat2.pbp.cs.ui.ac.id",
     #"flori-andrea-urbaneat.pbp.cs.ui.ac.id"
     ]
 
@@ -67,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'midterm_project.urls'
@@ -163,4 +165,6 @@ CSRF_TRUSTED_ORIGINS = [
     #"https://flori-andrea-urbaneat.pbp.cs.ui.ac.id",
     "https://kevin-adriano-urbaneat.pbp.cs.ui.ac.id",
     "http://kevin-adriano-urbaneat.pbp.cs.ui.ac.id",
+    "https://kevin-adriano-urbaneat2.pbp.cs.ui.ac.id",
+    "http://kevin-adriano-urbaneat2.pbp.cs.ui.ac.id",
 ]
