@@ -25,9 +25,15 @@ SECRET_KEY = 'django-insecure-g*&jn%iz!+imy+fur9!02l#c**zrpp%z@we)(nz%df40$icg9!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION = os.getenv("PRODUCTION", False)
-DEBUG = True
+DEBUG = not PRODUCTION #kev ini di set ke true abis itu rilis ke pws lgi klo masi masalah csrf supaya keliatan salahnya dmn
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1","kevin-adriano-urbaneat.pbp.cs.ui.ac.id","10.0.2.2", "flori-andrea-urbaneat.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = [
+    "localhost", 
+    "127.0.0.1",
+    "kevin-adriano-urbaneat.pbp.cs.ui.ac.id",
+    "10.0.2.2", 
+    #"flori-andrea-urbaneat.pbp.cs.ui.ac.id"
+    ]
 
 
 # Application definition
@@ -154,5 +160,7 @@ CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://flori-andrea-urbaneat.pbp.cs.ui.ac.id",
+    #"https://flori-andrea-urbaneat.pbp.cs.ui.ac.id",
+    "https://kevin-adriano-urbaneat.pbp.cs.ui.ac.id",
+    "http://kevin-adriano-urbaneat.pbp.cs.ui.ac.id",
 ]
