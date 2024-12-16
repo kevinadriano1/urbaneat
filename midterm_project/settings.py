@@ -154,5 +154,5 @@ CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://flori-andrea-urbaneat.pbp.cs.ui.ac.id/",
+    "https://flori-andrea-urbaneat.pbp.cs.ui.ac.id",
 ]
