@@ -28,7 +28,6 @@ def edit_restaurant(request, id):
         if form.is_valid():
             # Save the changes to the database
             form.save()
-            # Redirect to a relevant page, for example, back to the restaurant details or list view
             return HttpResponseRedirect(reverse('main:show_main'))
     else:
         # If it's a GET request, show the form pre-filled with the current data

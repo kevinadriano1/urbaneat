@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from main.models import FoodEntry
 from django.http import HttpResponse
 from django.core import serializers
-from main.models import FoodEntry  # Import your model
+from main.models import FoodEntry  
 import os
 import csv
 from django.contrib.auth.forms import UserCreationForm
@@ -83,7 +83,6 @@ def login_flutter(request):
                 "username": user.username,
                 "status": True,
                 "message": "Login successful!"
-                # Add other data if you want to send data to Flutter.
             }, status=200)
         else:
             return JsonResponse({
