@@ -161,3 +161,4 @@ def add_review_flutter(request, pk):
 
     return JsonResponse({'success': False, 'error': 'Invalid request method. Use POST.'}, status=405)
 
+
