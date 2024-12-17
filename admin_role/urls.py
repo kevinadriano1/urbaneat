@@ -9,5 +9,4 @@ urlpatterns = [
     path('edit_resto_api/<uuid:id>/', edit_restaurant_api, name='edit_restaurant_api'),
     path('create_resto_api/', create_restaurant_api, name='create_restaurant_api'),
     path('delete_resto_api/<uuid:id>/', delete_restaurant_api, name='delete_restaurant_api'),
-
 ]

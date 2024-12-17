@@ -76,7 +76,6 @@ def delete_restaurant_api(request, id):
 
     return JsonResponse({'message': 'Invalid request method'}, status=405)
 
-
 # Custom decorator to check if user is in the Restaurant_Manager group
 def is_restaurant_manager(user):
     if user.groups.filter(name='Restaurant_Manager').exists():
