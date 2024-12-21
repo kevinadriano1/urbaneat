@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 
 @csrf_exempt
 def edit_restaurant_api(request, id):
@@ -15,6 +17,22 @@ def edit_restaurant_api(request, id):
         try:
             # Parse incoming JSON data
             data = json.loads(request.body)
+
+            #Data type validation yuh
+            try:
+                url_validator = URLValidator()
+                url_validator(data.get('trip_advisor_url'))
+            except ValidationError:
+                return JsonResponse({'message': 'Invalid URL for Restaurant URL'}, status=400)
+            
+            try:
+                url_validator(data.get('image_url'))
+            except ValidationError:
+                return JsonResponse({'message': 'Invalid URL for Image URL'}, status=400)
+            
+            if not data.get('contact_number', '').isdigit():
+                return JsonResponse({'message': 'Invalid contact number, it must be numeric'}, status=400)
+            
             # Update the restaurant object with the received data
             form = FoodEntryForm(data, instance=restaurant_entry)
             if form.is_valid():
@@ -40,29 +58,49 @@ def edit_restaurant_api(request, id):
             'image_url': restaurant_entry.image_url,
         }
         return JsonResponse(data, status=200)
-    
-        
+
 @csrf_exempt
 def create_restaurant_api(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
+            
+            # Data type validation
+            try:
+                url_validator = URLValidator()
+                url_validator(data.get('trip_advisor_url'))
+            except ValidationError:
+                return JsonResponse({'message': 'Invalid URL for Restaurant URL'}, status=400)
+            
+            try:
+                url_validator(data.get('image_url'))
+            except ValidationError:
+                return JsonResponse({'message': 'Invalid URL for Image URL'}, status=400)
+            
+            if not data.get('contact_number', '').isdigit():
+                return JsonResponse({'message': 'Invalid contact number, it must be numeric'}, status=400)
+            
+            # Now, validate using the form
             form = FoodEntryForm(data)
             if form.is_valid():
                 food_entry = form.save(commit=False)
                 food_entry.reviews_rating = 0.0
                 food_entry.number_of_reviews = 0
-                food_entry.avg_rating = "0.0"
+                food_entry.avg_rating = "0.0"  # Ensure correct type for avg_rating
                 food_entry.save()
                 return JsonResponse({
                     'message': 'Restaurant created successfully',
                 }, status=200)
             else:
                 return JsonResponse({'errors': form.errors}, status=400)
+
         except json.JSONDecodeError:
             return JsonResponse({'message': 'Invalid JSON data'}, status=400)
+        except Exception as e:
+            return JsonResponse({'message': f'Unexpected error: {str(e)}'}, status=500)
 
     return JsonResponse({'message': 'Invalid request method'}, status=405)
+
 
 @csrf_exempt
 def delete_restaurant_api(request, id):
