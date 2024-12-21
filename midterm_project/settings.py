@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
     "kevin-adriano-urbaneat.pbp.cs.ui.ac.id",
     "10.0.2.2", 
     "kevin-adriano-urbaneat2.pbp.cs.ui.ac.id",
+    ".vercel.app"
     #"flori-andrea-urbaneat.pbp.cs.ui.ac.id"
     ]
 
