@@ -19,6 +19,25 @@ from authentication.forms import CustomUserCreationForm
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 import json
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout as auth_logout
+
+@csrf_exempt
+def logout_flutter(request):
+    username = request.user.username
+
+    try:
+        auth_logout(request)
+        return JsonResponse({
+            "username": username,
+            "status": True,
+            "message": "Logged out successfully!"
+        }, status=200)
+    except:
+        return JsonResponse({
+        "status": False,
+        "message": "Logout failed."
+        }, status=401)
 
 def register(request):
     form = CustomUserCreationForm()
