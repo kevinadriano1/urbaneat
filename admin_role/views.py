@@ -30,9 +30,6 @@ def edit_restaurant_api(request, id):
             except ValidationError:
                 return JsonResponse({'message': 'Invalid URL for Image URL'}, status=400)
             
-            if not data.get('contact_number', '').isdigit():
-                return JsonResponse({'message': 'Invalid contact number, it must be numeric'}, status=400)
-            
             # Update the restaurant object with the received data
             form = FoodEntryForm(data, instance=restaurant_entry)
             if form.is_valid():
@@ -76,9 +73,6 @@ def create_restaurant_api(request):
                 url_validator(data.get('image_url'))
             except ValidationError:
                 return JsonResponse({'message': 'Invalid URL for Image URL'}, status=400)
-            
-            if not data.get('contact_number', '').isdigit():
-                return JsonResponse({'message': 'Invalid contact number, it must be numeric'}, status=400)
             
             # Now, validate using the form
             form = FoodEntryForm(data)

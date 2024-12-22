@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g*&jn%iz!+imy+fur9!02l#c**zrpp%z@we)(nz%df40$icg9!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION = os.getenv("PRODUCTION", False)
-DEBUG = True #kev ini di set ke true abis itu rilis ke pws lgi klo masi masalah csrf supaya keliatan salahnya dmn
+DEBUG = not PRODUCTION #kev ini di set ke true abis itu rilis ke pws lgi klo masi masalah csrf supaya keliatan salahnya dmn
 
 ALLOWED_HOSTS = [
     "localhost", 
@@ -33,7 +33,6 @@ ALLOWED_HOSTS = [
     "kevin-adriano-urbaneat.pbp.cs.ui.ac.id",
     "10.0.2.2", 
     "kevin-adriano-urbaneat2.pbp.cs.ui.ac.id",
-    ".vercel.app"
     #"flori-andrea-urbaneat.pbp.cs.ui.ac.id"
     ]
 
