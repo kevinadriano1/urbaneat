@@ -73,6 +73,6 @@ dtypes: float64(1), int64(1), object(9)
   - Delete restaurants.
 
 ## Application Deployment Link
-http://kevin-adriano-urbaneat.pbp.cs.ui.ac.id/auth/login/
+https://kevin-adriano-urbaneat2.pbp.cs.ui.ac.id/auth/login/
 
 
